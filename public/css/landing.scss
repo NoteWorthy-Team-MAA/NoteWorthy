@@ -3,13 +3,13 @@
 $info: #FDB399;
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Poppins:ital,wght@0,400;1,300&display=swap');
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 
 // additional css here
 body {
     z-index: 0;
-    background-image: url("../public/img/unsplash_fVUl6kzIvLg.jpg");
+    background-image: url("../img/unsplash_fVUl6kzIvLg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
