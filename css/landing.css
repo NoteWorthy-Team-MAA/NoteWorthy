@@ -12022,4 +12022,43 @@ h1, .h1 {
 h3, .h3 {
   font-size: 20px;
   text-align: center;
+}
+
+@media screen and (min-width: 769px) {
+  #logo {
+    width: 100%;
+    max-width: 14rem;
+  }
+  #logInBtnTwoWrap {
+    display: none;
+  }
+  #mobileSS {
+    display: none;
+  }
+  #modo {
+    margin-top: 133px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #logInCont {
+    display: none;
+  }
+  #signUpCont {
+    display: none;
+  }
+  #logo {
+    width: 100%;
+  }
+  h1, .h1 {
+    font-size: 28px;
+  }
+  h3, .h3 {
+    font-size: 16px;
+  }
+  #desktopSS {
+    display: none;
+  }
+  #modo {
+    margin-top: 70px;
+  }
 }/*# sourceMappingURL=landing.css.map */
