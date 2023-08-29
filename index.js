@@ -45,7 +45,7 @@ function checkAuth(req, res, next) {
 
 
 app.get("/", (req, res) => {
-  res.render("index", {
+  res.render("landing", {
     locals: {
       main: "This is the body text of the homepage",
     },
@@ -137,24 +137,23 @@ app.post("/new", async (req, res) => {
 });
 
 
-app.get("/notes", (req, res) => {
+app.get("/notes", async (req, res) => {
+
   res.render("notes", {
+    locals: {
+      allNotes: await getAllNotes(),
+    },
     partials: {
       noteCard: "partials/noteCard",
     },
   });
 });
 
-const mockData = {
-  title: "Yes",
-  category: "Personal",
-  body: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
-};
-
 app.get("/notes/:note", async (req, res) => {
+  const { note } = req.params;
   res.render("note", {
     locals: {
-      main: mockData,
+      main: await getNote(note, 1),
     },
   });
 });
