@@ -1,0 +1,56 @@
+
+// include default variable overrides
+$info: #FDB399;
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Poppins:ital,wght@0,400;1,300&display=swap');
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+
+// additional css here
+body {
+    z-index: 0;
+    background-image: url("../public/img/unsplash_fVUl6kzIvLg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    overflow-y: hidden;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(251, 248, 240, 0.42) 61.46%, rgba(253, 179, 153, 0.42) 85.94%), rgba(85, 56, 56, 0.20);
+        z-index: 1;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: #553838;
+        opacity: 20%;
+        z-index: 2;
+    }
+}
+div {
+    z-index: 5;
+}
+#logInBtn:hover {
+    color: #ffffff93;
+}
+#logInBtn {
+    text-shadow: 0px 3px 15px rgba(51, 51, 51, 0.254);
+}
+#signUpBtn {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+h1 {
+    font-size: 64px;
+    text-align: center;
+}
+h3 {
+    font-size: 20px;
+    text-align: center;
+}
