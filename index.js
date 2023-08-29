@@ -4,17 +4,19 @@ const { getAllNotes, getNote } = require("./queries/db");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const session = require("express-session");
-
+const helmet = require("helmet");
 const { Users, Prefs, Notes } = require("./models");
 
 const PORT = 3000;
 const app = express();
 
+app.use(helmet());
 app.engine("html", es6Renderer);
 app.set("view engine", "html");
 app.use(express.json());
 app.use(express.static(__dirname + "/public"));
 
+app.use(express.urlencoded({ extended: true }));
 
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const store = new SequelizeStore({ db: Users.sequelize });
@@ -33,15 +35,25 @@ app.use(
 );
 store.sync();
 
-function checkAuth(req, res, next) {
-  if (req.session.user) {
-    next();
-  } else if (req.path == "/login") {
+// function checkAuth(req, res, next) {
+//   if (req.session.user) {
+//     next();
+//   } else if (req.path == "/login") {
+//     next();
+//   } else {
+//     res.redirect("/login");
+//   }
+// }
+
+const checkAuth = (req, res, next) => {
+  const pageNeedsLogIn = req.path === "/notes";
+  const isLoggedIn = !!req.session.user;
+  if (pageNeedsLogIn == isLoggedIn) {
     next();
   } else {
-    res.redirect("/login");
+    res.redirect(isLoggedIn ? "/notes" : "/login");
   }
-}
+};
 
 
 app.get("/", (req, res) => {
@@ -55,18 +67,18 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/login", (req, res) => {
+app.get("/login", checkAuth, (req, res) => {
   res.send(`
 <h1>Log in</h1>
 <form method="POST">
   <label>
     Username:
-    <input name="username" type="text" autofocus />
   </label>
+  <input name="username" type="text" id="username" autofocus />
   <label>
     Password:
-    <input name="password" type="password" />
   </label> 
+  <input name="password" type="password" id="password" />
  <input type="submit" value="do it!" />
 </form>
     `);
@@ -75,6 +87,7 @@ app.get("/login", (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
+  console.log(username, password)
   const user = await Users.findOne({
     where: { username },
   });
@@ -108,6 +121,10 @@ app.get("/new", (req, res) => {
     Password:
     <input type="text" id="password" name="password" required />
   </label> 
+  <label>
+  Email:
+  <input type="text" id="email" name="email" required />
+</label> 
  <input type="submit" value="do it!" />
 </form>
     `);
@@ -137,7 +154,7 @@ app.post("/new", async (req, res) => {
 });
 
 
-app.get("/notes", async (req, res) => {
+app.get("/notes", checkAuth, async (req, res) => {
 
   res.render("notes", {
     locals: {
