@@ -1,7 +1,8 @@
 const express = require("express");
 const es6Renderer = require("express-es6-template-engine");
-const PORT = 3000;
+const { getAllNotes, getNote } = require("./queries/db");
 
+const PORT = 3000;
 const app = express();
 
 app.engine("html", es6Renderer);
@@ -16,6 +17,28 @@ app.get("/", (req, res) => {
     },
     partials: {
       secondary: "partials/button",
+    },
+  });
+});
+
+app.get("/notes", (req, res) => {
+  res.render("notes", {
+    partials: {
+      noteCard: "partials/noteCard",
+    },
+  });
+});
+
+const mockData = {
+  title: "Yes",
+  category: "Personal",
+  body: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+};
+
+app.get("/notes/:note", async (req, res) => {
+  res.render("note", {
+    locals: {
+      main: mockData,
     },
   });
 });
