@@ -1,1 +1,9 @@
-<div>this is a card for the individual note</div>
+<div>
+  ${allNotes.map(note => `
+  <div>${note.createdAt}</div>
+  <div>${note.updatedAt}</div>
+  <div>${note.title}</div>
+  <div>${note.category}</div>
+  <div>${note.body}</div>
+  `).join("")}
+</div>
