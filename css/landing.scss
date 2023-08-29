@@ -1,8 +1,9 @@
 
 // include default variable overrides
 $info: #FDB399;
+$light: #FBF8F0;
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Poppins:ital,wght@0,400;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Poppins:ital,wght@0,400;0,700;1,300&display=swap');
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
 
@@ -43,7 +44,7 @@ div {
 #logInBtn {
     text-shadow: 0px 3px 15px rgba(51, 51, 51, 0.254);
 }
-#signUpBtn {
+#signUpBtn, form button {
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 h1 {
@@ -54,6 +55,29 @@ h3 {
     font-size: 20px;
     text-align: center;
 }
+#loginModal{
+    font-family: 'Poppins', sans-serif;
+}
+#usernameWrap {
+    border: solid;
+}
+#passwordWrap {
+    border: solid;
+}
+#emailWrap {
+    border: solid;
+}
+#logInHeader {
+    font-size: 53px;
+}
+input {
+border: none;
+width: 100%;
+}
+input:focus {
+    outline: none;
+}
+
 @media screen and (min-width: 769px) {
 #logo {
     width: 100%;
