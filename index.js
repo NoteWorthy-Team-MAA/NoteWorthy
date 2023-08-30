@@ -150,23 +150,22 @@ app.post("/notes", async (req, res) => {
 //UPDATING NOTE
 app.post("/notes/:id", async (req, res) => {
   const { id } = req.params;
-  const { title, body, category, userId } = req.body;
-  const updatedNote = await Notes.update(
-    {
-      title,
-      body,
-      category,
-    },
-    {
-      where: {
-        id,
-        userId,
-      },
+  const { title, body, category } = req.body;
+  const updatedNote = await Notes.update({
+    title,
+    body,
+    category,
+    }, {
+    where: {
+      id,
+      userId:req.session.user.id,
+
     }
   );
 
   res.json(updatedNote);
 });
+
 
 app.delete('/notes/:id', async (req, res) => {
   const { id } = req.params;
@@ -179,37 +178,16 @@ app.delete('/notes/:id', async (req, res) => {
 });
 
 // app.delete('/notes/:note', async (req, res) => {
+
 //   const { id } = req.params;
-//   const deletedNote = await Notes.destroy({
+//    await Notes.destroy({
 //       where: {
-//           id,
-//           userId,
+//           id
 //       }
 //   });
-//   res.json(deletedNote);
+//   res.redirect("/notes");
 // });
 
-// app.delete('/notes/:note', async (req, res) => {
-//   const { userId } = req.params;
-
-//   try {
-//       const deletedNote = await Notes.destroy({
-//           where: {
-//             id:param,
-//               userId
-//           }
-//       });
-
-//       res.json({
-//           message: `${deletedNote} notes deleted for userId ${userId}`
-//       });
-//   } catch (error) {
-//       res.status(500).json({
-//           message: 'Error deleting notes',
-//           error: error.message
-//       });
-//   }
-// });
 
 app.get("/logout", (req, res) => {
   req.session.destroy(function (err) {
