@@ -168,13 +168,14 @@ app.post("/notes/:id", async (req, res) => {
   res.json(updatedNote);
 });
 
-app.delete("/notes/:note", async (req, res) => {
-  const { note } = req.params;
-  res.render("note", {
-    locals: {
-      main: await deleteNote(note, 1),
-    },
+app.delete('/notes/:id', async (req, res) => {
+  const { id } = req.params;
+  const deletedNote = await Notes.destroy({
+      where: {
+          id
+      }
   });
+  res.json(deletedNote);
 });
 
 // app.delete('/notes/:note', async (req, res) => {
