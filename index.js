@@ -66,6 +66,7 @@ app.get("/", checkAuth, (req, res) => {
   });
 });
 
+
 app.get("/login", checkAuth, (req, res) => {
 });
 
@@ -131,12 +132,77 @@ app.get("/notes", checkAuth, async (req, res) => {
 
 app.get("/notes/:note", async (req, res) => {
   const { note } = req.params;
+  const { user } = req.session;
   res.render("note", {
     locals: {
-      main: await getNote(note, 1),
+      main: await getNote(note, user.id),
     },
   });
 });
+
+
+app.post('/notes', async (req, res) => {
+  const { title, body, category, userId  } = req.body;
+  const newNote = await Notes.create({
+      title,
+      body,
+      category,
+      userId
+  });
+  
+  res.json({
+      id: newNote.id
+  });
+})
+
+
+app.delete("/notes/:note", async (req, res) => {
+  const { note } = req.params;
+  res.render("note", {
+    locals: {
+      main: await deleteNote(note, 1),
+    },
+  });
+});
+
+
+// app.delete('/notes/:note', async (req, res) => {
+//   const { id } = req.params;
+//   const deletedNote = await Notes.destroy({
+//       where: {
+//           id,
+//           userId,
+//       }
+//   });
+//   res.json(deletedNote);
+// });
+
+
+// app.delete('/notes/:note', async (req, res) => {
+//   const { userId } = req.params;
+  
+//   try {
+//       const deletedNote = await Notes.destroy({
+//           where: {
+//             id:param,
+//               userId
+//           }
+//       });
+
+//       res.json({
+//           message: `${deletedNote} notes deleted for userId ${userId}`
+//       });
+//   } catch (error) {
+//       res.status(500).json({
+//           message: 'Error deleting notes',
+//           error: error.message
+//       });
+//   }
+// });
+
+
+
+
 
 app.get("/logout", (req, res) => {
   req.session.destroy(function (err) {
