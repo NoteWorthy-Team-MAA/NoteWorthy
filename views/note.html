@@ -19,14 +19,23 @@
       <div class="d-flex">
         <div class="topbar">Last Updated <span>${main.updatedAt}</span></div>
         <div class="btn-group d-flex">
-          <button>Save Entry</button>
-          <button>Delete</button>
+          <form>
+            <button onclick="deleteNote({$id})">Delete</button>
+          </form>
         </div>
       </div>
-      <form action="">
+      <form method="post">
+        <button type ="submit">Save Entry</button>
         <textarea name="title" id="title">${main.title}</textarea>
         <textarea id="body">${main.body}</textarea>
       </form>
     </div>
+    <script>
+      function deleteNote(id) {
+        fetch('/notes' + id,  {
+        method: 'DELETE'
+  })
+}
+    </script>
   </body>
 </html>
