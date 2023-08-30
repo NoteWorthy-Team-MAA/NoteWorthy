@@ -76,7 +76,7 @@ app.get("/", (req, res) => {
 //   <input name="username" type="text" id="username" autofocus />
 //   <label>
 //     Password:
-//   </label> 
+//   </label>
 //   <input name="password" type="password" id="password" />
 //  <input type="submit" value="do it!" />
 // </form>
@@ -163,9 +163,10 @@ app.get("/notes", checkAuth, async (req, res) => {
 
 app.get("/notes/:note", async (req, res) => {
   const { note } = req.params;
+  const { user } = req.session;
   res.render("note", {
     locals: {
-      main: await getNote(note, 1),
+      main: await getNote(note, user.id),
     },
   });
 });

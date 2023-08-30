@@ -3,10 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width='device-width', initial-scale=1.0" />
-    <title>Document</title>
+    <title>${main.title} | NoteWorthy</title>
+    <link rel="stylesheet" href="../public/css/landing.css" type="text/css" />
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script
+      src="../node_modules/tinymce/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
+    <script src="../public/js/tiny-mce-plugin.js"></script>
   </head>
   <body>
-    ${main.title}
-    <div>${main.body}</div>
+    <div class="custom-editor-wrapper">
+      <div class="d-flex">
+        <div class="topbar">Last Updated <span>${main.updatedAt}</span></div>
+        <div class="btn-group d-flex">
+          <button>Save Entry</button>
+          <button>Delete</button>
+        </div>
+      </div>
+      <form action="">
+        <textarea name="title" id="title">${main.title}</textarea>
+        <textarea id="body">${main.body}</textarea>
+      </form>
+    </div>
   </body>
 </html>
