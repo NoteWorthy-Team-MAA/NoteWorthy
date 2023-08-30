@@ -153,7 +153,7 @@ app.post("/new", async (req, res) => {
 app.get("/notes", checkAuth, async (req, res) => {
   res.render("notes", {
     locals: {
-      allNotes: await getAllNotes(),
+      allNotes: await getAllNotes(req.session.user.id),
     },
     partials: {
       noteCard: "partials/noteCard",
