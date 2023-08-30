@@ -55,7 +55,7 @@ const checkAuth = (req, res, next) => {
   }
 };
 
-app.get("/", (req, res) => {
+app.get("/", checkAuth, (req, res) => {
   res.render("landing", {
     locals: {
       main: "This is the body text of the homepage",
@@ -66,22 +66,8 @@ app.get("/", (req, res) => {
   });
 });
 
-// app.get("/login", checkAuth, (req, res) => {
-//   res.send(`
-// <h1>Log in</h1>
-// <form method="POST">
-//   <label>
-//     Username:
-//   </label>
-//   <input name="username" type="text" id="username" autofocus />
-//   <label>
-//     Password:
-//   </label> 
-//   <input name="password" type="password" id="password" />
-//  <input type="submit" value="do it!" />
-// </form>
-//     `);
-// });
+app.get("/login", checkAuth, (req, res) => {
+});
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -107,24 +93,6 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/new", (req, res) => {
-  res.send(`
-<h1>Sign up</h1>
-<form method="POST">
-  <label>
-    Username:
-  <input type="text" id="username" name="username" required />
-  </label>
-  <label>
-    Password:
-    <input type="text" id="password" name="password" required />
-  </label> 
-  <label>
-  Email:
-  <input type="text" id="email" name="email" required />
-</label> 
- <input type="submit" value="do it!" />
-</form>
-    `);
 });
 
 app.post("/new", async (req, res) => {
@@ -139,7 +107,7 @@ app.post("/new", async (req, res) => {
           email,
           password: hash,
         });
-        res.redirect("/login");
+        res.redirect("/");
       } catch (e) {
         if (e.name === "SequelizeUniqueConstraintError") {
         }
