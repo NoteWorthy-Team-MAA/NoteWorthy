@@ -14,7 +14,7 @@ app.use(helmet());
 app.engine("html", es6Renderer);
 app.set("view engine", "html");
 app.use(express.json());
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname));
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -55,7 +55,6 @@ const checkAuth = (req, res, next) => {
   }
 };
 
-
 app.get("/", (req, res) => {
   res.render("landing", {
     locals: {
@@ -84,10 +83,9 @@ app.get("/login", checkAuth, (req, res) => {
     `);
 });
 
-
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log(username, password)
+  console.log(username, password);
   const user = await Users.findOne({
     where: { username },
   });
@@ -107,7 +105,6 @@ app.post("/login", async (req, res) => {
     res.redirect("/login");
   }
 });
-
 
 app.get("/new", (req, res) => {
   res.send(`
@@ -153,9 +150,7 @@ app.post("/new", async (req, res) => {
   }
 });
 
-
 app.get("/notes", checkAuth, async (req, res) => {
-
   res.render("notes", {
     locals: {
       allNotes: await getAllNotes(),
@@ -174,7 +169,6 @@ app.get("/notes/:note", async (req, res) => {
     },
   });
 });
-
 
 app.get("/logout", (req, res) => {
   req.session.destroy(function (err) {
