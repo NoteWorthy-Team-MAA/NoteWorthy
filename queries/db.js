@@ -18,6 +18,21 @@ const getNote = async (param, userId) => {
   });
 };
 
+const updateNote = async (title, body, category, id, sessionId) => {
+  return await Notes.update(
+    {
+      title,
+      body,
+      category,
+    },
+    {
+      where: {
+        id,
+        userId: sessionId,
+      },
+    }
+  );
+};
 
 const deleteNote = async (param, userId) => {
   return await Notes.destroy({
@@ -28,9 +43,9 @@ const deleteNote = async (param, userId) => {
   });
 };
 
-
 module.exports = {
   getAllNotes,
   getNote,
-  deleteNote
+  deleteNote,
+  updateNote,
 };
