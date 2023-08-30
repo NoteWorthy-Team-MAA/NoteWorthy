@@ -66,9 +66,7 @@ app.get("/", checkAuth, (req, res) => {
   });
 });
 
-
-app.get("/login", checkAuth, (req, res) => {
-});
+app.get("/login", checkAuth, (req, res) => {});
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -93,8 +91,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/new", (req, res) => {
-});
+app.get("/new", (req, res) => {});
 
 app.post("/new", async (req, res) => {
   const { username, password, email } = req.body;
@@ -140,38 +137,34 @@ app.get("/notes/:note", async (req, res) => {
   });
 });
 
-
 ///CREATING NEW NOTE
-app.post('/notes', async (req, res) => {
-  const { title, body, category, userId  } = req.body;
+app.post("/notes", async (req, res) => {
   const newNote = await Notes.create({
+    title: "Add Title Here",
+    body: "What's on your mind...",
+    userId: req.session.user.id,
+  });
+  res.redirect(`/notes/${newNote.id}`);
+});
+
+//UPDATING NOTE
+app.post("/notes/:id", async (req, res) => {
+  const { id } = req.params;
+  const { title, body, category, userId } = req.body;
+  const updatedNote = await Notes.update(
+    {
       title,
       body,
       category,
-      userId
-  });
-  
-  res.json({
-      id: newNote.id
-  });
-})
-
-
-//UPDATING NOTE
-app.post('/notes/:id', async (req, res) => {
-  const { id } = req.params;
-  const { title, body, category, userId } = req.body;
-  const updatedNote = await Notes.update({
-    title,
-    body,
-    category,
-    }, {
-    where: {
-      id,
-      userId,
+    },
+    {
+      where: {
+        id,
+        userId,
+      },
     }
-  });
-  
+  );
+
   res.json(updatedNote);
 });
 
@@ -185,7 +178,6 @@ app.delete('/notes/:id', async (req, res) => {
   res.json(deletedNote);
 });
 
-
 // app.delete('/notes/:note', async (req, res) => {
 //   const { id } = req.params;
 //   const deletedNote = await Notes.destroy({
@@ -197,10 +189,9 @@ app.delete('/notes/:id', async (req, res) => {
 //   res.json(deletedNote);
 // });
 
-
 // app.delete('/notes/:note', async (req, res) => {
 //   const { userId } = req.params;
-  
+
 //   try {
 //       const deletedNote = await Notes.destroy({
 //           where: {
@@ -219,10 +210,6 @@ app.delete('/notes/:id', async (req, res) => {
 //       });
 //   }
 // });
-
-
-
-
 
 app.get("/logout", (req, res) => {
   req.session.destroy(function (err) {

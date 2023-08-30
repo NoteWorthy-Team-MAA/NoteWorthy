@@ -19,8 +19,19 @@ const getNote = async (param, userId) => {
 };
 
 
+const deleteNote = async (param, userId) => {
+  return await Notes.destroy({
+    where: {
+      id: param,
+      userId,
+    },
+  });
+};
+
 
 module.exports = {
   getAllNotes,
   getNote,
+  deleteNote,
+
 };
