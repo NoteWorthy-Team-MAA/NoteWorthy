@@ -121,3 +121,11 @@ input:focus {
         margin-top: 70px;
     }
 }
+@media screen and (max-width: 460px) {
+    label {
+        font-size: 12px;
+    }
+    #loginHeader {
+        font-size: 24px;
+    }
+}
