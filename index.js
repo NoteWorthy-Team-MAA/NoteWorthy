@@ -1,6 +1,6 @@
 const express = require("express");
 const es6Renderer = require("express-es6-template-engine");
-const { getAllNotes, getNote } = require("./queries/db");
+const { getAllNotes, getNote, updateNote } = require("./queries/db");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const session = require("express-session");
@@ -151,28 +151,15 @@ app.post("/notes", async (req, res) => {
 app.post("/notes/:id", async (req, res) => {
   const { id } = req.params;
   const { title, body, category } = req.body;
-  const updatedNote = await Notes.update({
-    title,
-    body,
-    category,
-    }, {
-    where: {
-      id,
-      userId:req.session.user.id,
-
-    }
-  );
-
-  res.json(updatedNote);
+  await updateNote(title, body, category, id, req.session.user.id);
 });
 
-
-app.delete('/notes/:id', async (req, res) => {
+app.delete("/notes/:id", async (req, res) => {
   const { id } = req.params;
   const deletedNote = await Notes.destroy({
-      where: {
-          id
-      }
+    where: {
+      id,
+    },
   });
   res.json(deletedNote);
 });
@@ -187,7 +174,6 @@ app.delete('/notes/:id', async (req, res) => {
 //   });
 //   res.redirect("/notes");
 // });
-
 
 app.get("/logout", (req, res) => {
   req.session.destroy(function (err) {
