@@ -66,9 +66,7 @@ app.get("/", checkAuth, (req, res) => {
   });
 });
 
-
-app.get("/login", checkAuth, (req, res) => {
-});
+app.get("/login", checkAuth, (req, res) => {});
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -93,8 +91,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/new", (req, res) => {
-});
+app.get("/new", (req, res) => {});
 
 app.post("/new", async (req, res) => {
   const { username, password, email } = req.body;
@@ -140,25 +137,18 @@ app.get("/notes/:note", async (req, res) => {
   });
 });
 
-
 ///CREATING NEW NOTE
-app.post('/notes', async (req, res) => {
-  const { title, body, category, userId  } = req.body;
+app.post("/notes", async (req, res) => {
   const newNote = await Notes.create({
-      title,
-      body,
-      category,
-      userId
+    title: "Add Title Here",
+    body: "What's on your mind...",
+    userId: req.session.user.id,
   });
-  
-  res.json({
-      id: newNote.id
-  });
-})
-
+  res.redirect(`/notes/${newNote.id}`);
+});
 
 //UPDATING NOTE
-app.post('/notes/:id', async (req, res) => {
+app.post("/notes/:id", async (req, res) => {
   const { id } = req.params;
   const { title, body, category } = req.body;
   const updatedNote = await Notes.update({
@@ -169,13 +159,26 @@ app.post('/notes/:id', async (req, res) => {
     where: {
       id,
       userId:req.session.user.id,
+
     }
-  });
-  
+  );
+
   res.json(updatedNote);
 });
 
-// app.delete('/notes/:id', async (req, res) => {
+
+app.delete('/notes/:id', async (req, res) => {
+  const { id } = req.params;
+  const deletedNote = await Notes.destroy({
+      where: {
+          id
+      }
+  });
+  res.json(deletedNote);
+});
+
+// app.delete('/notes/:note', async (req, res) => {
+
 //   const { id } = req.params;
 //    await Notes.destroy({
 //       where: {
@@ -184,7 +187,6 @@ app.post('/notes/:id', async (req, res) => {
 //   });
 //   res.redirect("/notes");
 // });
-
 
 
 app.get("/logout", (req, res) => {
