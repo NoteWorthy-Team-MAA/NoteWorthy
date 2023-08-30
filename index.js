@@ -66,6 +66,7 @@ app.get("/", checkAuth, (req, res) => {
   });
 });
 
+
 app.get("/login", checkAuth, (req, res) => {
 });
 
@@ -131,9 +132,10 @@ app.get("/notes", checkAuth, async (req, res) => {
 
 app.get("/notes/:note", async (req, res) => {
   const { note } = req.params;
+  const { user } = req.session;
   res.render("note", {
     locals: {
-      main: await getNote(note, 1),
+      main: await getNote(note, user.id),
     },
   });
 });
