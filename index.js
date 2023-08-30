@@ -66,22 +66,22 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/login", checkAuth, (req, res) => {
-  res.send(`
-<h1>Log in</h1>
-<form method="POST">
-  <label>
-    Username:
-  </label>
-  <input name="username" type="text" id="username" autofocus />
-  <label>
-    Password:
-  </label> 
-  <input name="password" type="password" id="password" />
- <input type="submit" value="do it!" />
-</form>
-    `);
-});
+// app.get("/login", checkAuth, (req, res) => {
+//   res.send(`
+// <h1>Log in</h1>
+// <form method="POST">
+//   <label>
+//     Username:
+//   </label>
+//   <input name="username" type="text" id="username" autofocus />
+//   <label>
+//     Password:
+//   </label> 
+//   <input name="password" type="password" id="password" />
+//  <input type="submit" value="do it!" />
+// </form>
+//     `);
+// });
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
