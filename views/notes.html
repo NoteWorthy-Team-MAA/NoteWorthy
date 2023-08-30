@@ -6,6 +6,7 @@
     <title>Notes</title>
     <link rel="shortcut icon" href="../public/img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../public/css/notes.css" type="text/css">
+    
   </head>
   <body class="bg-light">
     <!-- All Notes
@@ -27,40 +28,58 @@
     </div>
     </div>
 </div>
-
-
-<div class="content d-flex flex-column mx-5">
-  <div class="row">
-    <div class="col m-4" id="filterByDate">
-      <svg xmlns="http://www.w3.org/2000/svg" width="29" height="27" viewBox="0 0 29 27" fill="none">
-        <path d="M7.0875 0V20.25H0L8.85938 27L17.7188 20.25H10.6313V0H7.0875ZM14.175 0V3.375H28.35V0H14.175ZM14.175 6.75V10.125H24.8062V6.75H14.175ZM14.175 13.5V16.875H21.2625V13.5H14.175Z" fill="#333333"/>
-      </svg>
-      <span class="fst-italic fs-6 fw-bolder text-decoration-underline" style="color: rgba(51, 51, 51, 0.70);
-      font-family: Poppins;
-      cursor: pointer;">Sort By Date (Descending)</span>
-    </div>
+<div class="row">
+  <div class="col m-4"id="filterByDate">
+    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="27" viewBox="0 0 29 27" fill="none">
+      <path d="M7.0875 0V20.25H0L8.85938 27L17.7188 20.25H10.6313V0H7.0875ZM14.175 0V3.375H28.35V0H14.175ZM14.175 6.75V10.125H24.8062V6.75H14.175ZM14.175 13.5V16.875H21.2625V13.5H14.175Z" fill="#333333"/>
+    </svg>
+    <span class="fst-italic fs-6 fw-bolder text-decoration-underline" style="color: rgba(51, 51, 51, 0.70);
+    font-family: Poppins;
+    cursor: pointer;">Sort By Date (Descending)</span>
   </div>
-  <div class="card-wrap p-3 bg-light rounded-4" style="filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.50));">
+</div>
+${allNotes.map(note => 
+  
+  `
+<div class="content d-flex flex-column mx-5 mb-4">
+  <div class="card-wrap p-2 bg-light rounded-4" style="filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.50));">
   <div class="row d-flex flex-column" style="width: 100%;">
     <div class="col d-flex">
-      <span class="fw-bold fs-4 " id="dayOfMonth">28</span>
-      <span class="fw-light lh-lg fs-6 align-self-end" id="month">AUG</span>
-      <span class="tag p-2 rounded-pill text-white ms-auto ">PERSONAL</span>
+      <span class="fw-bold fs-4 " id="dayOfMonth">${
+        new Date(note.createdAt).toLocaleDateString("en-US", {
+        day: "numeric",
+      }).toUpperCase()
+    }
+  </span>
+      <span class="fw-light lh-lg fs-6 align-self-end" id="month">${
+        new Date(note.createdAt).toLocaleDateString("en-US", {
+        month: "short",
+      }).toUpperCase()
+    }
+  </span>
+      <span class="tag py-2 px-3 rounded-pill text-white ms-auto">${note.category.toUpperCase()}</span>
     </div>
     <div class="col">
-      <span class="fst-italic" id="lastUpdated"> last updated</span>
+      <span class="fst-italic" id="lastUpdated">${
+        new Date(note.createdAt).toLocaleDateString("en-US", {
+        month: "short",
+      }).toUpperCase()
+    }
+    ${
+        new Date(note.updatedAt).toLocaleDateString("en-US", {
+        day: "numeric",
+      }).toUpperCase()
+    } last updated</span>
     </div>
     <div class="col">
       <span class="title fw-normal fst-normal fs-6" style="color: #333;
       font-family: Poppins;">
-        This ia another day
+       ${note.title}
       </span>
     </div>
     <div class="col">
       <span class="cardBody fw-light overflow-hidden">
-        ${allNotes.map(note => `
-          ${note.body.slice(0, 100)}
-          `)}
+          ${note.body.slice(0, 50)}...
       </span>
     </div>
   </div>
@@ -98,4 +117,7 @@
     </defs>
   </svg>
 </div> 
+`).join('')}
+<script src="../public/js/notes.js"></script>
   </body>
+</html>
