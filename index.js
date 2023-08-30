@@ -55,7 +55,7 @@ const checkAuth = (req, res, next) => {
   }
 };
 
-app.get("/", (req, res) => {
+app.get("/", checkAuth, (req, res) => {
   res.render("landing", {
     locals: {
       main: "This is the body text of the homepage",
@@ -66,22 +66,9 @@ app.get("/", (req, res) => {
   });
 });
 
-// app.get("/login", checkAuth, (req, res) => {
-//   res.send(`
-// <h1>Log in</h1>
-// <form method="POST">
-//   <label>
-//     Username:
-//   </label>
-//   <input name="username" type="text" id="username" autofocus />
-//   <label>
-//     Password:
-//   </label>
-//   <input name="password" type="password" id="password" />
-//  <input type="submit" value="do it!" />
-// </form>
-//     `);
-// });
+
+app.get("/login", checkAuth, (req, res) => {
+});
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -107,24 +94,6 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/new", (req, res) => {
-  res.send(`
-<h1>Sign up</h1>
-<form method="POST">
-  <label>
-    Username:
-  <input type="text" id="username" name="username" required />
-  </label>
-  <label>
-    Password:
-    <input type="text" id="password" name="password" required />
-  </label> 
-  <label>
-  Email:
-  <input type="text" id="email" name="email" required />
-</label> 
- <input type="submit" value="do it!" />
-</form>
-    `);
 });
 
 app.post("/new", async (req, res) => {
@@ -139,7 +108,7 @@ app.post("/new", async (req, res) => {
           email,
           password: hash,
         });
-        res.redirect("/login");
+        res.redirect("/");
       } catch (e) {
         if (e.name === "SequelizeUniqueConstraintError") {
         }
@@ -170,6 +139,70 @@ app.get("/notes/:note", async (req, res) => {
     },
   });
 });
+
+
+app.post('/notes', async (req, res) => {
+  const { title, body, category, userId  } = req.body;
+  const newNote = await Notes.create({
+      title,
+      body,
+      category,
+      userId
+  });
+  
+  res.json({
+      id: newNote.id
+  });
+})
+
+
+app.delete("/notes/:note", async (req, res) => {
+  const { note } = req.params;
+  res.render("note", {
+    locals: {
+      main: await deleteNote(note, 1),
+    },
+  });
+});
+
+
+// app.delete('/notes/:note', async (req, res) => {
+//   const { id } = req.params;
+//   const deletedNote = await Notes.destroy({
+//       where: {
+//           id,
+//           userId,
+//       }
+//   });
+//   res.json(deletedNote);
+// });
+
+
+// app.delete('/notes/:note', async (req, res) => {
+//   const { userId } = req.params;
+  
+//   try {
+//       const deletedNote = await Notes.destroy({
+//           where: {
+//             id:param,
+//               userId
+//           }
+//       });
+
+//       res.json({
+//           message: `${deletedNote} notes deleted for userId ${userId}`
+//       });
+//   } catch (error) {
+//       res.status(500).json({
+//           message: 'Error deleting notes',
+//           error: error.message
+//       });
+//   }
+// });
+
+
+
+
 
 app.get("/logout", (req, res) => {
   req.session.destroy(function (err) {
