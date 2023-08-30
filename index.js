@@ -141,6 +141,7 @@ app.get("/notes/:note", async (req, res) => {
 });
 
 
+///CREATING NEW NOTE
 app.post('/notes', async (req, res) => {
   const { title, body, category, userId  } = req.body;
   const newNote = await Notes.create({
@@ -155,6 +156,24 @@ app.post('/notes', async (req, res) => {
   });
 })
 
+
+//UPDATING NOTE
+app.post('/notes/:id', async (req, res) => {
+  const { id } = req.params;
+  const { title, body, category, userId } = req.body;
+  const updatedNote = await Notes.update({
+    title,
+    body,
+    category,
+    }, {
+    where: {
+      id,
+      userId,
+    }
+  });
+  
+  res.json(updatedNote);
+});
 
 app.delete("/notes/:note", async (req, res) => {
   const { note } = req.params;
