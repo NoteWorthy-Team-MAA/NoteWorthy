@@ -13,7 +13,11 @@
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
   </head>
   <body class="bg-light">
-      
+      <div class="loadingOverlay d-none position-fixed w-100 h-100 bg-dark opacity-50 z-3 align-items-center justify-content-center">
+        <div class="spinner-border z-3 text-primary " role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
     <div id="header" class="d-flex w-100">
       <div class="row w-100 d-flex z-3 align-content-center">
         <div class="col w-100 mx-5">
@@ -95,7 +99,7 @@
       </div>
     </div>
     ${allNotes.map(note => `
-    <a href="/notes/${note.id}" class="text-body text-decoration-none">
+    <a href="/notes/${note.id}" class="text-body text-decoration-none noteLink">
       <div class="content d-flex flex-column mx-5 mb-4">
         <div
           class="card-wrap p-2 bg-light rounded-4"
@@ -116,7 +120,7 @@
               >
             </div>
             <div class="col">
-              <span class="fst-italic" id="lastUpdated"
+              <span class="fst-italic opacity-50" id="lastUpdated"
                 >${ new Date(note.createdAt).toLocaleDateString("en-US", {
                 month: "short", }).toUpperCase() } ${ new
                 Date(note.updatedAt).toLocaleDateString("en-US", { day:
@@ -125,7 +129,7 @@
             </div>
             <div class="col">
               <span
-                class="title fw-normal fst-normal fs-6"
+                class="title fw-normal fst-normal fs-6 fw-bold"
                 style="color: #333; font-family: Poppins"
               >
                 ${note.title.replace(/(<([^>]+)>)/ig, '')}
@@ -146,7 +150,7 @@
       <button type="submit" id="addBtnWrap" class="bg-transparent border-0 ">
         <div class="">
           <svg
-            id="addBtn"
+            class="addBtn"
             xmlns="http://www.w3.org/2000/svg"
             width="146"
             height="146"
@@ -281,7 +285,7 @@
           <button type="submit" id="addBtnWrapMobile" class="bg-transparent border-0">
           <div class="">
             <svg
-              id="addBtn"
+              class="addBtn"
               xmlns="http://www.w3.org/2000/svg"
               width="146"
               height="146"
@@ -411,8 +415,6 @@
     </div>
       </div>
     </div>
-
-
     <!-- MODALS -->
 
     <div
@@ -424,6 +426,7 @@
     >
       <div class="modal-dialog rounded-4">
         <div class="modal-content bg-light" id="optionsModal">
+          <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="modal-body d-flex flex-column">
             <div class="row m-1 justify-content-between">
               <div class="col d-flex align-content-center">
@@ -448,8 +451,8 @@
               </div>
             </div>
             <div class="row d-flex m-1 mt-4">
-              <form action="/logout" method="post">
-                <button type="submit" class="modalBtn w-100">
+              <form action="/logout" method="post" id="logOutForm">
+                <button type="submit" class="modalBtn w-100 logoutBtn">
                   <div class="col btn btn-danger w-100">
                     <span class="fw-bolder">LOG&nbsp;OUT</span>
                   </div>

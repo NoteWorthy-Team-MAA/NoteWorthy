@@ -22,18 +22,20 @@
   <body>
     <div class="custom-editor-wrapper">
       <div class="d-flex">
-        <div class="topbar">Last Updated <span>${(main.updatedAt || "")}</span></div>
+        <div class="topbar">
+          Last Updated <span>${(main.updatedAt || "")}</span>
+        </div>
         <div class="btn-group d-flex">
-            <button id="deleteBtn">Delete</button>
+          <button id="deleteBtn">Delete</button>
         </div>
       </div>
       <form method="post">
         <button type="submit">Save Entry</button>
+        <p style="color: green">${saveMessage}</p>
         <textarea name="title" id="title">${main.title}</textarea>
         <textarea id="body" name="body">${main.body}</textarea>
       </form>
     </div>
-<script src="../public/js/delete-note.js"></script>
-
+    <script src="../public/js/delete-note.js"></script>
   </body>
 </html>

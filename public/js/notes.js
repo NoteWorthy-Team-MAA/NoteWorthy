@@ -13,6 +13,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let sorting = 'ASC'
 
+  document.querySelector("#addBtnWrap").addEventListener("click", (e) => {
+    document
+      .querySelector(".loadingOverlay")
+      .classList.replace("d-none", "d-flex");
+  });
+
+  document.querySelector(".logoutBtn").addEventListener("click", (e) => {
+    document
+      .querySelector(".loadingOverlay")
+      .classList.replace("d-none", "d-flex");
+    document.querySelector(".btn-close").click();
+  });
+
+  const allNoteArr = document.querySelectorAll(".noteLink");
+
+  for (let i = 0; allNoteArr.length > i; i++) {
+    allNoteArr[i].addEventListener("click", () => {
+      document
+        .querySelector(".loadingOverlay")
+        .classList.replace("d-none", "d-flex");
+    });
+  }
+
+
   document.querySelector("#filterByDateText").addEventListener("click", (e) => {
     if (e.target.innerText == "Sort By Date (Descending)") {
       e.target.innerText = "Sort By Date (Ascending)";
