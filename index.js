@@ -96,19 +96,20 @@ app.post("/", async (req, res) => {
   if (username === "" || password === "" || email === "") {
     console.log("username, password or email is blank");
   } else {
-    bcrypt.hash(password, saltRounds, function (err, hash) {
+    bcrypt.hash(password, saltRounds, async function (err, hash) {
       try {
         const newUser = Users.create({
           username,
           email,
           password: hash,
         });
-        res.redirect("/");
+        req.session.user = await newUser;
+        res.redirect("/notes");
       } catch (e) {
         if (e.name === "SequelizeUniqueConstraintError") {
         }
 
-        res.redirect("/new");
+        res.redirect("/");
       }
     });
   }
@@ -126,11 +127,14 @@ app.get("/notes", checkAuth, async (req, res) => {
 });
 
 app.get("/notes/:note", async (req, res) => {
+  const save = req.query.save;
+  let saveMessage = save ? "saved ✅" : "";
   const { note } = req.params;
   const { user } = req.session;
   res.render("note", {
     locals: {
       main: await getNote(note, user.id),
+      saveMessage,
     },
   });
 });
@@ -138,8 +142,8 @@ app.get("/notes/:note", async (req, res) => {
 ///CREATING NEW NOTE
 app.post("/notes", async (req, res) => {
   const newNote = await Notes.create({
-    title: "Add Title Here",
-    body: "What's on your mind...",
+    title: "",
+    body: "",
     userId: req.session.user.id,
   });
   res.redirect(`/notes/${newNote.id}`);
@@ -150,7 +154,7 @@ app.post("/notes/:id", async (req, res) => {
   const { id } = req.params;
   const { title, body } = req.body;
   await updateNote(title, body, id);
-  res.redirect(`/notes/`);
+  res.redirect(`/notes/${id}?save=success`);
 });
 
 app.delete("/notes/:id", async (req, res) => {
@@ -176,7 +180,11 @@ app.delete("/notes/:id", async (req, res) => {
 
 app.post("/logout", (req, res) => {
   req.session.destroy(function (err) {
-    res.redirect("/");
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/");
+    }
   });
 });
 
