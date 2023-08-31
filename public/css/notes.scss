@@ -13,6 +13,12 @@ body {
     background-size: cover;
     height: 100vh;
     font-family: 'Poppins', sans-serif;
+    min-width: 100vw;
+}
+#mobileButtonsContainer {
+  min-width: 300px;
+  width: 100%;
+
 }
 #header {
     z-index: 0;
@@ -32,7 +38,8 @@ body {
     }
 }
 #logo{
-    max-width: 510px;
+    min-width: 220px;
+    width: 100%;
 }
 svg:hover {
     cursor: pointer;
@@ -48,6 +55,9 @@ svg:hover {
     position: fixed;
     right: 66px;
     bottom: 108px;
+}
+#addBtnWrapMobile {
+
 }
 #addBtn {
     width: 100px;
@@ -173,3 +183,5 @@ svg:hover {
   .sliderCS.round:before {
     border-radius: 50%;
   }
+
+  
