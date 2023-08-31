@@ -1,8 +1,9 @@
 const { Notes, Users, Prefs } = require("../models");
 const { Sequelize } = require("sequelize");
 
-const getAllNotes = async (userId) => {
+const getAllNotes = async (sort, userId) => {
   return await Notes.findAll({
+    order: [['updatedAt', sort]],
     where: {
       userId,
     },

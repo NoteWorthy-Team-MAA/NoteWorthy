@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  let sorting = 'ASC'
+
   document.querySelector("#addBtnWrap").addEventListener("click", (e) => {
     document
       .querySelector(".loadingOverlay")
@@ -34,12 +36,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
   document.querySelector("#filterByDateText").addEventListener("click", (e) => {
     if (e.target.innerText == "Sort By Date (Descending)") {
       e.target.innerText = "Sort By Date (Ascending)";
+      sorting = 'ASC'
     } else {
       e.target.innerText = "Sort By Date (Descending)";
+      sorting = 'DESC'
     }
     document.querySelector("#filterByDate").classList.toggle("rotated-icon");
+    fetch("", {
+      method: "GET",
+    })
+      .then((res) => window.location.href=`/notes?sort=${sorting}`)
   });
 });
+
+
