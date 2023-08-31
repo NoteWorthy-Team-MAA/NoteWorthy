@@ -22,7 +22,7 @@
   <body>
     <div class="custom-editor-wrapper">
       <div class="d-flex">
-        <div class="topbar">Last Updated <span>${main.updatedAt}</span></div>
+        <div class="topbar">Last Updated <span>${(main.updatedAt || "")}</span></div>
         <div class="btn-group d-flex">
             <button id="deleteBtn">Delete</button>
         </div>
