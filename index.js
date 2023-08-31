@@ -91,7 +91,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/new", async (req, res) => {
+app.post("/", async (req, res) => {
   const { username, password, email } = req.body;
   if (username === "" || password === "" || email === "") {
     console.log("username, password or email is blank");
