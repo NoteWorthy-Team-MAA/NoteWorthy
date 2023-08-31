@@ -51,7 +51,7 @@ const checkAuth = (req, res, next) => {
   if (pageNeedsLogIn == isLoggedIn) {
     next();
   } else {
-    res.redirect(isLoggedIn ? "/notes" : "/login");
+    res.redirect(isLoggedIn ? "/notes" : "/");
   }
 };
 
@@ -91,8 +91,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/new", (req, res) => {});
-
 app.post("/new", async (req, res) => {
   const { username, password, email } = req.body;
   if (username === "" || password === "" || email === "") {
@@ -127,7 +125,7 @@ app.get("/notes", checkAuth, async (req, res) => {
   });
 });
 
-app.get("/notes/:note", async (req, res) => {
+app.get("/notes/:note", checkAuth, async (req, res) => {
   const { note } = req.params;
   const { user } = req.session;
   res.render("note", {
@@ -175,7 +173,7 @@ app.delete("/notes/:id", async (req, res) => {
 //   res.redirect("/notes");
 // });
 
-app.get("/logout", (req, res) => {
+app.post("/logout", (req, res) => {
   req.session.destroy(function (err) {
     res.redirect("/");
   });
