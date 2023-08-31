@@ -58,7 +58,7 @@ svg:hover {
 #addBtnWrapMobile {
 
 }
-#addBtn {
+.addBtn {
     width: 100px;
     height: 100px;
 }
@@ -201,7 +201,6 @@ a {
 }
 #filterByDate {
   transition: transform 0.3s ease-in-out;
-
 }
 .rotated-icon {
   transform: rotate(180deg);
