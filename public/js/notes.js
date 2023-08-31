@@ -10,14 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
       tag[i].style.background = "#B977FB";
     }
   }
+  const addBtnArr = document.querySelectorAll(".addBtnBtn");
 
+  for (let i = 0; i < addBtnArr.length; i++) {
+    addBtnArr[i].addEventListener("click", () => {
+      document
+        .querySelector(".loadingOverlay")
+        .classList.replace("d-none", "d-flex");
+    });
+  }
   let sorting = 'ASC'
-
-  document.querySelector("#addBtnWrap").addEventListener("click", (e) => {
-    document
-      .querySelector(".loadingOverlay")
-      .classList.replace("d-none", "d-flex");
-  });
 
   document.querySelector(".logoutBtn").addEventListener("click", (e) => {
     document
