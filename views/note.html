@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width='device-width', initial-scale=1.0" />
-    <title>${(main.title || "")} | NoteWorthy</title>
+    <title>${main.title || ""} | NoteWorthy</title>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script
       src="../node_modules/tinymce/tinymce.min.js"
@@ -20,27 +20,17 @@
   <body>
     <div class="custom-editor-wrapper">
       <div class="d-flex">
-        <div class="topbar">
-          Last Updated <span>${(main.updatedAt || "")}</span>
-        </div>
+        <div class="topbar">Last Updated <span>${main.updatedAt}</span></div>
         <div class="btn-group d-flex">
-          <form>
-            <button onclick="deleteNote({$id})">Delete</button>
-          </form>
+            <button id="deleteBtn">Delete</button>
         </div>
       </div>
       <form method="post">
-        <button type ="submit">Save Entry</button>
+        <button type="submit">Save Entry</button>
         <textarea name="title" id="title">${main.title}</textarea>
         <textarea id="body">${main.body}</textarea>
       </form>
     </div>
-    <script>
-      function deleteNote(id) {
-        fetch('/notes' + id,  {
-        method: 'DELETE'
-  })
-}
-    </script>
+<script src="../public/js/delete-note.js"></script>
   </body>
 </html>
