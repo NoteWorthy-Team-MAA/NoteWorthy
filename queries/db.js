@@ -9,6 +9,10 @@ const getAllNotes = async (userId) => {
   });
 };
 
+const allCategories = async (userId) => {
+  return await Notes.findAll({});
+};
+
 const getNote = async (param, userId) => {
   return await Notes.findOne({
     where: {
@@ -18,10 +22,11 @@ const getNote = async (param, userId) => {
   });
 };
 
-const updateNote = async (title, body, id) => {
+const updateNote = async (title, category, body, id) => {
   return await Notes.update(
     {
       title,
+      category,
       body,
     },
     {
@@ -46,4 +51,5 @@ module.exports = {
   getNote,
   deleteNote,
   updateNote,
+  allCategories,
 };
