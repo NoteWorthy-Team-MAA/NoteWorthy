@@ -415,8 +415,6 @@
     </div>
       </div>
     </div>
-
-
     <!-- MODALS -->
 
     <div
@@ -428,6 +426,7 @@
     >
       <div class="modal-dialog rounded-4">
         <div class="modal-content bg-light" id="optionsModal">
+          <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="modal-body d-flex flex-column">
             <div class="row m-1 justify-content-between">
               <div class="col d-flex align-content-center">
@@ -452,8 +451,8 @@
               </div>
             </div>
             <div class="row d-flex m-1 mt-4">
-              <form action="/logout" method="post">
-                <button type="submit" class="modalBtn w-100">
+              <form action="/logout" method="post" id="logOutForm">
+                <button type="submit" class="modalBtn w-100 logoutBtn">
                   <div class="col btn btn-danger w-100">
                     <span class="fw-bolder">LOG&nbsp;OUT</span>
                   </div>

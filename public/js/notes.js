@@ -17,6 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
       .classList.replace("d-none", "d-flex");
   });
 
+  document.querySelector(".logoutBtn").addEventListener("click", (e) => {
+    document
+      .querySelector(".loadingOverlay")
+      .classList.replace("d-none", "d-flex");
+    document.querySelector(".btn-close").click();
+  });
+
   const allNoteArr = document.querySelectorAll(".noteLink");
 
   for (let i = 0; allNoteArr.length > i; i++) {
