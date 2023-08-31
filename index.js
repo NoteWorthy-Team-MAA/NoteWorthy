@@ -103,27 +103,30 @@ app.post("/", async (req, res) => {
           email,
           password: hash,
         });
-        res.redirect("/");
+        res.redirect("/notes");
       } catch (e) {
         if (e.name === "SequelizeUniqueConstraintError") {
         }
 
-        res.redirect("/new");
+        res.redirect("/");
       }
     });
   }
 });
 
 app.get("/notes", checkAuth, async (req, res) => {
+  const sort = req.query.sort
+  console.log(sort)
   res.render("notes", {
     locals: {
-      allNotes: await getAllNotes(req.session.user.id),
+      allNotes: await getAllNotes(sort, req.session.user.id),
     },
     partials: {
       noteCard: "partials/noteCard",
     },
   });
 });
+
 
 app.get("/notes/:note", async (req, res) => {
   const { note } = req.params;
@@ -163,16 +166,6 @@ app.delete("/notes/:id", async (req, res) => {
   res.json(deletedNote);
 });
 
-// app.delete('/notes/:note', async (req, res) => {
-
-//   const { id } = req.params;
-//    await Notes.destroy({
-//       where: {
-//           id
-//       }
-//   });
-//   res.redirect("/notes");
-// });
 
 app.post("/logout", (req, res) => {
   req.session.destroy(function (err) {
