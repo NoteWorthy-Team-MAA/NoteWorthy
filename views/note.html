@@ -22,13 +22,9 @@
   <body>
     <div class="custom-editor-wrapper">
       <div class="d-flex">
-        <div class="topbar">
-          Last Updated <span>${(main.updatedAt || "")}</span>
-        </div>
+        <div class="topbar">Last Updated <span>${(main.updatedAt || "")}</span></div>
         <div class="btn-group d-flex">
-          <form>
-            <button onclick="deleteNote({$id})">Delete</button>
-          </form>
+            <button id="deleteBtn">Delete</button>
         </div>
       </div>
       <form method="post">
@@ -37,12 +33,7 @@
         <textarea id="body" name="body">${main.body}</textarea>
       </form>
     </div>
-    <script>
-      function deleteNote(id) {
-        fetch("/notes" + id, {
-          method: "DELETE",
-        });
-      }
-    </script>
+<script src="../public/js/delete-note.js"></script>
+
   </body>
 </html>
