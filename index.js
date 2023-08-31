@@ -116,8 +116,8 @@ app.post("/", async (req, res) => {
 });
 
 app.get("/notes", checkAuth, async (req, res) => {
-  const sort = req.query.sort
-  console.log(sort)
+  const sort = req.query.sort;
+
   res.render("notes", {
     locals: {
       allNotes: await getAllNotes(sort, req.session.user.id),
@@ -127,7 +127,6 @@ app.get("/notes", checkAuth, async (req, res) => {
     },
   });
 });
-
 
 app.get("/notes/:note", async (req, res) => {
   const save = req.query.save;
@@ -170,7 +169,6 @@ app.delete("/notes/:id", async (req, res) => {
   });
   res.json(deletedNote);
 });
-
 
 app.post("/logout", (req, res) => {
   req.session.destroy(function (err) {
