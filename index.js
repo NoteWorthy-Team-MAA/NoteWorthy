@@ -138,6 +138,7 @@ app.get("/notes/:note", async (req, res) => {
     locals: {
       main: await getNote(note, user.id),
       saveMessage,
+      // allCategories: await allCategories(),
     },
   });
 });
@@ -155,8 +156,8 @@ app.post("/notes", async (req, res) => {
 //UPDATING NOTE
 app.post("/notes/:id", async (req, res) => {
   const { id } = req.params;
-  const { title, body } = req.body;
-  await updateNote(title, body, id);
+  const { title, category, body } = req.body;
+  await updateNote(title, category, body, id);
   res.redirect(`/notes/${id}?save=success`);
 });
 
