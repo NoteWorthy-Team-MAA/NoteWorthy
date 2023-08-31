@@ -125,7 +125,7 @@ app.get("/notes", checkAuth, async (req, res) => {
   });
 });
 
-app.get("/notes/:note", checkAuth, async (req, res) => {
+app.get("/notes/:note", async (req, res) => {
   const { note } = req.params;
   const { user } = req.session;
   res.render("note", {
