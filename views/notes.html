@@ -105,50 +105,51 @@
       </div>
     </div>
     ${allNotes.map(note => `
-    <div class="content d-flex flex-column mx-5 mb-4">
-      <div
-        class="card-wrap p-2 bg-light rounded-4"
-        style="filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.5))"
-      >
-        <div class="row d-flex flex-column" style="width: 100%">
-          <div class="col d-flex">
-            <span class="fw-bold fs-4" id="dayOfMonth"
-              >${ new Date(note.createdAt).toLocaleDateString("en-US", { day:
-              "numeric", }).toUpperCase() }
-            </span>
-            <span class="fw-light lh-lg fs-6 align-self-end" id="month"
-              >${ new Date(note.createdAt).toLocaleDateString("en-US", { month:
-              "short", }).toUpperCase() }
-            </span>
-            <span class="tag py-2 px-3 rounded-pill text-white ms-auto"
-              >${note.category.toUpperCase()}</span
-            >
-          </div>
-          <div class="col">
-            <span class="fst-italic" id="lastUpdated"
-              >${ new Date(note.createdAt).toLocaleDateString("en-US", { month:
-              "short", }).toUpperCase() } ${ new
-              Date(note.updatedAt).toLocaleDateString("en-US", { day: "numeric",
-              }).toUpperCase() } last updated</span
-            >
-          </div>
-          <div class="col">
-            <span
-              class="title fw-normal fst-normal fs-6"
-              style="color: #333; font-family: Poppins"
-            >
-              ${note.title}
-            </span>
-          </div>
-          <div class="col">
-            <span class="cardBody fw-light overflow-hidden">
-              ${note.body.slice(0, 50)}...
-            </span>
+    <a href="/notes/${note.id}" class="text-body text-decoration-none">
+      <div class="content d-flex flex-column mx-5 mb-4">
+        <div
+          class="card-wrap p-2 bg-light rounded-4"
+          style="filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.5))"
+        >
+          <div class="row d-flex flex-column" style="width: 100%">
+            <div class="col d-flex">
+              <span class="fw-bold fs-4" id="dayOfMonth"
+                >${ new Date(note.createdAt).toLocaleDateString("en-US", { day:
+                "numeric", }).toUpperCase() }
+              </span>
+              <span class="fw-light lh-lg fs-6 align-self-end" id="month"
+                >${ new Date(note.createdAt).toLocaleDateString("en-US", {
+                month: "short", }).toUpperCase() }
+              </span>
+              <span class="tag py-2 px-3 rounded-pill text-white ms-auto"
+                >${note.category.toUpperCase()}</span
+              >
+            </div>
+            <div class="col">
+              <span class="fst-italic" id="lastUpdated"
+                >${ new Date(note.createdAt).toLocaleDateString("en-US", {
+                month: "short", }).toUpperCase() } ${ new
+                Date(note.updatedAt).toLocaleDateString("en-US", { day:
+                "numeric", }).toUpperCase() } last updated</span
+              >
+            </div>
+            <div class="col">
+              <span
+                class="title fw-normal fst-normal fs-6"
+                style="color: #333; font-family: Poppins"
+              >
+                ${note.title.replace(/(<([^>]+)>)/ig, '')}
+              </span>
+            </div>
+            <div class="col">
+              <span class="cardBody fw-light overflow-hidden">
+                ${note.body.replace(/(<([^>]+)>)/ig, '').slice(0, 50)}...
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
+    </a>
     `).join('')}
 
     <form class="addBtnDesktopForm d-none d-lg-block" method="POST">

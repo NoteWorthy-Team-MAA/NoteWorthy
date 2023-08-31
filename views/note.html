@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width='device-width', initial-scale=1.0" />
-    <title>${(main.title || "")} | NoteWorthy</title>
+    <title>
+      ${(main.title.replace(/(<([^>]+)>)/ig, '') || "")} | NoteWorthy
+    </title>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script
       src="../node_modules/tinymce/tinymce.min.js"
@@ -30,17 +32,17 @@
         </div>
       </div>
       <form method="post">
-        <button type ="submit">Save Entry</button>
+        <button type="submit">Save Entry</button>
         <textarea name="title" id="title">${main.title}</textarea>
-        <textarea id="body">${main.body}</textarea>
+        <textarea id="body" name="body">${main.body}</textarea>
       </form>
     </div>
     <script>
       function deleteNote(id) {
-        fetch('/notes' + id,  {
-        method: 'DELETE'
-  })
-}
+        fetch("/notes" + id, {
+          method: "DELETE",
+        });
+      }
     </script>
   </body>
 </html>
