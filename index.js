@@ -51,7 +51,7 @@ const checkAuth = (req, res, next) => {
   if (pageNeedsLogIn == isLoggedIn) {
     next();
   } else {
-    res.redirect(isLoggedIn ? "/notes" : "/login");
+    res.redirect(isLoggedIn ? "/notes" : "/");
   }
 };
 
@@ -91,9 +91,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/new", (req, res) => {});
-
-app.post("/new", async (req, res) => {
+app.post("/", async (req, res) => {
   const { username, password, email } = req.body;
   if (username === "" || password === "" || email === "") {
     console.log("username, password or email is blank");
@@ -150,8 +148,9 @@ app.post("/notes", async (req, res) => {
 //UPDATING NOTE
 app.post("/notes/:id", async (req, res) => {
   const { id } = req.params;
-  const { title, body, category } = req.body;
-  await updateNote(title, body, category, id, req.session.user.id);
+  const { title, body } = req.body;
+  await updateNote(title, body, id);
+  res.redirect(`/notes/`);
 });
 
 app.delete("/notes/:id", async (req, res) => {
@@ -175,7 +174,7 @@ app.delete("/notes/:id", async (req, res) => {
 //   res.redirect("/notes");
 // });
 
-app.get("/logout", (req, res) => {
+app.post("/logout", (req, res) => {
   req.session.destroy(function (err) {
     res.redirect("/");
   });

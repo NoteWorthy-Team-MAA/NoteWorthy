@@ -18,17 +18,15 @@ const getNote = async (param, userId) => {
   });
 };
 
-const updateNote = async (title, body, category, id, sessionId) => {
+const updateNote = async (title, body, id) => {
   return await Notes.update(
     {
       title,
       body,
-      category,
     },
     {
       where: {
         id,
-        userId: sessionId,
       },
     }
   );
