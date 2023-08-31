@@ -148,8 +148,9 @@ app.post("/notes", async (req, res) => {
 //UPDATING NOTE
 app.post("/notes/:id", async (req, res) => {
   const { id } = req.params;
-  const { title, body, category } = req.body;
-  await updateNote(title, body, category, id, req.session.user.id);
+  const { title, body } = req.body;
+  await updateNote(title, body, id);
+  res.redirect(`/notes/`);
 });
 
 app.delete("/notes/:id", async (req, res) => {
