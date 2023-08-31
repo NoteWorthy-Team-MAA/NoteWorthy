@@ -48,7 +48,6 @@ svg:hover {
     cursor: pointer;
 }    
 .tag {
-    background: #FB7777;
     font-size: 12px;
 }
 #addBtnWrap {
@@ -183,5 +182,32 @@ svg:hover {
   .sliderCS.round:before {
     border-radius: 50%;
   }
+#offcanvasBottomLabel {
+  color: #333;
+font-family: Poppins;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.category {
+  width: 60%;
+}
+a:hover {
+cursor: pointer;
+}
+a {
+  text-decoration: none;
+}
+#filterByDate {
+  transition: transform 0.3s ease-in-out;
 
-  
+}
+.rotated-icon {
+  transform: rotate(180deg);
+}
+@media (max-width: 500px) {
+  .category {
+    width: 100%;
+  }
+}
