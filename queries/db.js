@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 
 const getAllNotes = async (sort, userId) => {
   return await Notes.findAll({
-    order: [['updatedAt', sort]],
+    order: [["updatedAt", sort || "DESC"]],
     where: {
       userId,
     },
