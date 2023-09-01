@@ -96,7 +96,8 @@
                 >${ new Date(note.createdAt).toLocaleDateString("en-US", {
                 month: "short", }).toUpperCase() } ${ new
                 Date(note.updatedAt).toLocaleDateString("en-US", { day:
-                "numeric", }).toUpperCase() } last updated</span
+                "numeric", }).toUpperCase() }</span><span class="fst-normal"> ${ new
+                  Date(note.updatedAt).toLocaleTimeString("en-US").toUpperCase() }</span><span class="fst-italic"> last updated</span
               >
             </div>
             <div class="col">
