@@ -47,7 +47,7 @@ tinymce.init({
   skin: "oxide",
   height: "7vh",
   plugins: "lists code table codesample link",
-
+  content_css: "/public/css/note.css",
   toolbar: false,
   menubar: false,
   statusbar: false,

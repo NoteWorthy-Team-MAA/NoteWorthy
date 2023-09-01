@@ -19,31 +19,182 @@
     <link rel="stylesheet" href="../public/css/note.css" type="text/css" />
     <script src="../public/js/tiny-mce-plugin.js"></script>
   </head>
-  <body>
-    <div class="custom-editor-wrapper">
-      <div class="d-flex">
-        <div class="topbar">
-          Last Updated <span>${(main.updatedAt || "")}</span>
+  <body id="mainBody">
+    <div class="loadingOverlay d-none position-fixed w-100 h-100 bg-dark opacity-50 z-3 align-items-center justify-content-center">
+      <div class="spinner-border z-3 text-primary " role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div id="header" class="d-none w-100 d-md-flex shadowHover">
+      <div class="row w-100 d-flex z-3 align-content-center">
+        <div class="col w-100 mx-5">
+          <img class="img-fluid" id="logo" src="../public/img/Group 54.png" />
         </div>
-        <div class="btn-group d-flex">
-          <button id="deleteBtn">Delete</button>
+        <div class="col w-100 justify-content-end d-flex align-items-center gap-5 me-5 d-none d-lg-flex" id="searchOptionsBtnDesktop">
+          <a href="/notes">
+            <button
+            type="button"
+            class="modalBtn btn triggersLoadingScreen" id="filterIcon"
+            data-bs-toggle="offcanvas" data-bs-target="#categories" aria-controls="categories"
+          >
+            <img src="../public/img/backBtn.svg" alt="search">
+          </button>
+          </a>
+          
+          <button
+            type="button"
+            class="modalBtn btn"
+            data-bs-toggle="modal"
+            data-bs-target="#options"
+          >
+            <img src="../public/img/cogDesktop.svg">
+          </button>
         </div>
       </div>
-      <form method="post">
-        <button type="submit">Save Entry</button>
-        <p style="color: green">${saveMessage}</p>
-        <textarea name="title" id="title">${main.title}</textarea>
-        <select name="category" id="category">
-          <option value="ALL">ALL</option>
-          <option value="PERSONAL">PERSONAL</option>
-          <option value="PROFESSIONAL">PROFESSIONAL</option>
-          <option value="HEALTH">HEALTH</option>
-          <option value="SCHOOL">SCHOOL</option>
-          <option value="TRAVEL">TRAVEL</option>
-        </select>
-        <textarea id="body" name="body">${main.body}</textarea>
-      </form>
     </div>
+    <div class="d-flex mx-5 my-5 my-md-3">
+    <div class="custom-editor-wrapper w-100" >
+      <div class="d-flex row">
+        <div class="col">
+         <div class="topbar">
+           <span class="fst-italic text-black opacity-50">Last Updated</span>&nbsp;
+           <span class="fst-italic text-black opacity-50" style="font-weight: 900;">
+            ${ new Date(main.updatedAt).toLocaleDateString("en-US", {
+            month: "short", }).toUpperCase() } ${ new
+            Date(main.updatedAt).toLocaleDateString("en-US", { day:
+            "numeric", }).toUpperCase() }
+           </span>
+          </div>
+        </div>
+    </div>
+    
+    <form method="post">
+      <div class="row flex-md-row flex-column">
+        <div class="col-md-7 col-12">
+          <textarea placeholder="Title Here" class="border-0 bg-transparent titleStyle" name="title" id="title">${main.title}</textarea>
+        </div>
+           <div class="col-md-2 col-12 d-flex align-items-center justify-content-md-start justify-content-end">
+             <p class="mb-0" style="color: green">${saveMessage}</p>
+           </div>
+      <div class="col-12 d-flex mb-2 mb-md-0 col-md-2 justify-content-md-center justify-content-end align-items-center">
+            <button class="triggersLoadingScreen btn btn-light px-2 py-0 rounded-4 actionBtn border-0" type="submit" style="height: 3vh;">
+              <span class="opacity-50 text-black saveBtnText p-0">
+                SAVE&nbsp;ENTRY
+              </span>
+            </button>
+           </div> 
+      <div class="col-12 col-md-1 d-flex mb-2 mb-md-0 justify-content-md-start justify-content-end align-items-center">
+          <button id="deleteBtn" class="triggersLoadingScreen btn btn-danger px-2 py-0 rounded-4 actionBtn border-0">
+            <span class="text-white saveBtnText p-0">
+              DELETE
+            </span>
+          </button>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+      <select aria-placeholder="Set a value" class="bg-info border-0 shadow-sm ps-1 rounded-5 text-white pe-0" name="category" id="category">
+                <option value="ALL">ALL</option>
+                <option value="PERSONAL">PERSONAL</option>
+                <option value="PROFESSIONAL">PROFESSIONAL</option>
+                <option value="HEALTH">HEALTH</option>
+                <option value="SCHOOL">SCHOOL</option>
+                <option value="TRAVEL">TRAVEL</option>
+        </select>
+      </div>
+    </div>
+    <hr class=" text-black-50 w-25">
+    <div class="row">
+              <textarea placeholder="Type here..." id="body" name="body">${main.body}</textarea>
+            </div>
+            </form>
+    </div>
+  </div>
+  <div id="micIconWrap" class="shadowHover ">
+  <button type="submit" id="MicIconBtn" class="d-lg-block d-none bg-transparent border-0 micIcon position-fixed translate-middle">
+      <img src="../public/img/micIcon.svg" alt="Mic">
+    </button>
+  </div>
+  <div class="d-flex d-lg-none justify-content-center position-fixed start-50 translate-middle-x z-3 bottom-0 w-100 shadowHover" id="mobileButtonsContainer">
+    <div class="row d-flex align-items-center gap-4 justify-content-center">
+      <div class="col-2 d-flex justify-content-center ">
+        <a href="/notes">
+          <button
+            type="button"
+            class="modalBtn border-0 bg-transparent triggersLoadingScreen">
+            <img src="../public/img/blackBackBtn.svg">
+          </button>
+        </a>
+      </div> 
+      <div class="col-4 d-flex justify-content-center">
+      <form method="POST" class="" id="mobileButtons">
+        <button type="submit" id="addBtnWrapMobile" class="bg-transparent border-0 addBtnBtn">
+        <div id="addBtnDesktopWrap">
+          <img id="addBtnDesktop" src="../public/img/micIcon.svg" alt="Add Button">
+        </div>
+      </button>
+    </form>
+  </div>
+  <div class="col-2 d-flex justify-content-center ">
+    <button
+            type="button"
+            class="modalBtn btn"
+            data-bs-toggle="modal"
+            data-bs-target="#options"
+          >
+            <img src="../public/img/cogWheelBlack.svg">
+          </button>
+  </div>
+    </div>
+  </div>
+
+  <!-- MODAL  -->
+  <div
+  class="modal fade"
+  id="options"
+  tabindex="-1"
+  aria-labelledby="options"
+  aria-hidden="true"
+>
+  <div class="modal-dialog rounded-4">
+    <div class="modal-content bg-light" id="optionsModal">
+      <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body d-flex flex-column">
+        <div class="row m-1 justify-content-between">
+          <div class="col d-flex align-content-center">
+            <span class="fs-6 fw-bolder">Auto&nbsp;Save</span>
+          </div>
+          <div class="col text-end">
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row m-1">
+          <div class="col d-flex align-content-center">
+            <span class="fs-6 fw-bolder">Color&nbsp;Mode</span>
+          </div>
+          <div class="col text-end">
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="sliderCS round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row d-flex m-1 mt-4">
+          <form action="/logout" method="post" id="logOutForm">
+            <button type="submit" class="modalBtn w-100 logoutBtn">
+              <div class="col btn btn-danger w-100">
+                <span class="fw-bolder">LOG&nbsp;OUT</span>
+              </div>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     <script src="../public/js/delete-note.js"></script>
     <script src="../public/js/note.js" type="module"></script>
   </body>

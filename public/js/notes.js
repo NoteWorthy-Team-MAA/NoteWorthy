@@ -10,16 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
       tag[i].style.background = "#B977FB";
     }
   }
-  const addBtnArr = document.querySelectorAll(".addBtnBtn");
 
-  for (let i = 0; i < addBtnArr.length; i++) {
-    addBtnArr[i].addEventListener("click", () => {
-      document
-        .querySelector(".loadingOverlay")
-        .classList.replace("d-none", "d-flex");
-    });
-  }
-  let sorting = 'ASC'
+  let sorting = "ASC";
 
   document.querySelector(".logoutBtn").addEventListener("click", (e) => {
     document
@@ -28,31 +20,27 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".btn-close").click();
   });
 
-  const allNoteArr = document.querySelectorAll(".noteLink");
+  const loadingScreenBtns = document.querySelectorAll(".triggersLoadingScreen");
 
-  for (let i = 0; allNoteArr.length > i; i++) {
-    allNoteArr[i].addEventListener("click", () => {
+  for (let i = 0; i < loadingScreenBtns.length; i++) {
+    loadingScreenBtns[i].addEventListener("click", (e) => {
       document
         .querySelector(".loadingOverlay")
         .classList.replace("d-none", "d-flex");
     });
   }
 
-
   document.querySelector("#filterByDateText").addEventListener("click", (e) => {
     if (e.target.innerText == "Sort By Date (Descending)") {
       e.target.innerText = "Sort By Date (Ascending)";
-      sorting = 'ASC'
+      sorting = "ASC";
     } else {
       e.target.innerText = "Sort By Date (Descending)";
-      sorting = 'DESC'
+      sorting = "DESC";
     }
     document.querySelector("#filterByDate").classList.toggle("rotated-icon");
     fetch("", {
       method: "GET",
-    })
-      .then((res) => window.location.href=`/notes?sort=${sorting}`)
+    }).then((res) => (window.location.href = `/notes?sort=${sorting}`));
   });
 });
-
-
