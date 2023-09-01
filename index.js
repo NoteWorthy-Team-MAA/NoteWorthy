@@ -116,11 +116,16 @@ app.post("/", async (req, res) => {
 });
 
 app.get("/notes", checkAuth, async (req, res) => {
-  const sort = req.query.sort;
-
+  let sort = req.query.sort;
+  console.log(sort);
   res.render("notes", {
     locals: {
       allNotes: await getAllNotes(sort, req.session.user.id),
+      sortMessage:
+        sort === "ASC"
+          ? "Sort By Date (Ascending)"
+          : "Sort By Date (Descending)",
+      rotation: sort === "ASC" ? "rotated-icon" : "",
     },
     partials: {
       noteCard: "partials/noteCard",
