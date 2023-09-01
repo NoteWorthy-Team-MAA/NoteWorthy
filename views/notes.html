@@ -110,7 +110,10 @@
       </div>
     </div>
     ${allNotes.map(note => `
-    <a href="/notes/${note.id}" class="text-body text-decoration-none noteLink">
+    <a
+      href="/notes/${note.id}?cat=${note.category}"
+      class="text-body text-decoration-none noteLink"
+    >
       <div class="content d-flex flex-column mx-5 mb-4">
         <div
           class="card-wrap p-2 bg-light rounded-4"
