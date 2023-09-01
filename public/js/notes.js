@@ -6,12 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
       tag[i].style.background = "#FB7777";
     } else if (tag[i].innerHTML.toUpperCase() == "PROFESSIONAL") {
       tag[i].style.background = "#2C9A4B";
+    } else if (tag[i].innerHTML.toUpperCase() == "HEALTH") {
+      tag[i].style.background = "#0FD5D8";
+    } else if (tag[i].innerHTML.toUpperCase() == "SCHOOL") {
+      tag[i].style.background = "#0FD5D8";
+    } else if (tag[i].innerHTML.toUpperCase() == "TRAVEL") {
+      tag[i].style.background = "#6410CF";
     } else if (tag[i].innerHTML.toUpperCase() == "ALL") {
-      tag[i].style.background = "#B977FB";
+      tag[i].style.background = "#373939";
     }
   }
-
-  let sorting = "ASC";
 
   document.querySelector(".logoutBtn").addEventListener("click", (e) => {
     document
@@ -29,18 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
         .classList.replace("d-none", "d-flex");
     });
   }
+});
 
-  document.querySelector("#filterByDateText").addEventListener("click", (e) => {
-    if (e.target.innerText == "Sort By Date (Descending)") {
-      e.target.innerText = "Sort By Date (Ascending)";
-      sorting = "ASC";
+document.querySelector("#filterByDateText").addEventListener("click", (e) => {
+  document.querySelector("#filterByDate").classList.toggle("rotated-icon");
+  fetch("", {
+    method: "GET",
+  }).then((res) => {
+    if (window.location.search === "?sort=ASC") {
+      window.location.href = `/notes?sort=DESC`;
     } else {
-      e.target.innerText = "Sort By Date (Descending)";
-      sorting = "DESC";
+      window.location.href = `/notes?sort=ASC`;
     }
-    document.querySelector("#filterByDate").classList.toggle("rotated-icon");
-    fetch("", {
-      method: "GET",
-    }).then((res) => (window.location.href = `/notes?sort=${sorting}`));
   });
 });
