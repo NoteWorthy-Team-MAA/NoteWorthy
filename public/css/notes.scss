@@ -212,11 +212,16 @@ a {
 }
 .noteLink {
   transition: 0.2s all ease-in-out;
+  position: relative;
+  bottom: 0px;
 }
 .noteLink:hover {
   cursor: pointer;
   filter: drop-shadow(0px 2px 20px #fdb49958) !important;
+  // transform: translateY(-10px);
+  bottom: 5px;
 }
+
 @media (max-width: 500px) {
   .category {
     width: 100%;
