@@ -6,8 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
       tag[i].style.background = "#FB7777";
     } else if (tag[i].innerHTML.toUpperCase() == "PROFESSIONAL") {
       tag[i].style.background = "#2C9A4B";
+    } else if (tag[i].innerHTML.toUpperCase() == "HEALTH") {
+      tag[i].style.background = "#0FD5D8";
+    } else if (tag[i].innerHTML.toUpperCase() == "SCHOOL") {
+      tag[i].style.background = "#0FD5D8";
+    } else if (tag[i].innerHTML.toUpperCase() == "TRAVEL") {
+      tag[i].style.background = "#6410CF";
     } else if (tag[i].innerHTML.toUpperCase() == "ALL") {
-      tag[i].style.background = "#B977FB";
+      tag[i].style.background = "#373939";
     }
   }
   const addBtnArr = document.querySelectorAll(".addBtnBtn");
