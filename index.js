@@ -135,7 +135,7 @@ app.get("/notes", checkAuth, async (req, res) => {
 
 app.get("/notes/:note", async (req, res) => {
   const save = req.query.save;
-  let saveMessage = save ? "saved ✅" : "";
+  let saveMessage = save ? "SAVED" : "";
   const { note } = req.params;
   const { user } = req.session;
   res.render("note", {

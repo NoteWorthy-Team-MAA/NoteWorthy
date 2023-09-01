@@ -7,3 +7,13 @@ for (var i = 0; i < options.length; i++) {
     break;
   }
 }
+
+const loadingScreenBtns = document.querySelectorAll(".triggersLoadingScreen");
+
+for (let i = 0; i < loadingScreenBtns.length; i++) {
+  loadingScreenBtns[i].addEventListener("click", (e) => {
+    document
+      .querySelector(".loadingOverlay")
+      .classList.replace("d-none", "d-flex");
+  });
+}
