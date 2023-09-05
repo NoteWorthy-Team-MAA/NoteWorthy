@@ -112,7 +112,7 @@
     </div>
   </div>
   <div id="micIconWrap" class="shadowHover ">
-  <button type="submit" id="MicIconBtn" class="d-lg-block d-none bg-transparent border-0 micIcon position-fixed translate-middle">
+  <button type="submit" id="MicIconBtn" class="d-lg-block d-none bg-transparent border-0 micIcon position-fixed translate-middle record">
       <img src="../public/img/micIcon.svg" alt="Mic">
     </button>
   </div>
@@ -148,6 +148,17 @@
   </div>
     </div>
   </div>
+
+  <!--SPEECH COMPONENETS-->
+  <div class="mb-3">
+    <label for="message-text" class="col-form-label">Message:</label>
+    <div class="result" spellcheck="false"
+    placeholder="Text will be shown here" id="message-text"></div>
+    <p class="interim"></p>
+  </div>
+
+<button type="button" class="btn clear" >Start Over</button>
+<button type="button" class="btn add" id="insertText"><p>Add this</p></button>
 
   <!-- MODAL  -->
   <div
@@ -198,5 +209,6 @@
 </div>
     <script src="../public/js/delete-note.js"></script>
     <script src="../public/js/note.js" type="module"></script>
+    <script src="../public/js/speech-modal.js"></script>
   </body>
 </html>
