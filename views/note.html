@@ -156,20 +156,30 @@ ${main.body}</textarea
         <img src="../public/img/micIcon.svg" alt="Mic" />
       </button>
     </div>
-    <div
-      class="d-flex d-lg-none justify-content-center position-fixed start-50 translate-middle-x z-3 bottom-0 w-100 shadowHover"
-      id="mobileButtonsContainer"
-    >
-      <div class="row d-flex align-items-center gap-4 justify-content-center">
-        <div class="col-2 d-flex justify-content-center">
-          <a href="/notes" class="">
-            <button
-              type="button"
-              class="modalBtn border-0 bg-transparent triggersLoadingScreen"
-            >
-              <img src="../public/img/blackBackBtn.svg" />
-            </button>
-          </a>
+
+  </div>
+  <div id="micIconWrap" class="shadowHover ">
+  <button type="submit" id="MicIconBtn" class="d-lg-block d-none bg-transparent border-0 micIcon position-fixed translate-middle record">
+      <img src="../public/img/micIcon.svg" alt="Mic">
+    </button>
+  </div>
+  <div class="d-flex d-lg-none justify-content-center position-fixed start-50 translate-middle-x z-3 bottom-0 w-100 shadowHover" id="mobileButtonsContainer">
+    <div class="row d-flex align-items-center gap-4 justify-content-center">
+      <div class="col-2 d-flex justify-content-center ">
+        <a href="/notes" class="">
+          <button
+            type="button"
+            class="modalBtn border-0 bg-transparent triggersLoadingScreen">
+            <img src="../public/img/blackBackBtn.svg">
+          </button>
+        </a>
+      </div> 
+      <div class="col-4 d-flex justify-content-center">
+      <form method="POST" class="" id="mobileButtons">
+        <button type="submit" id="addBtnWrapMobile" class="bg-transparent border-0 addBtnBtn">
+        <div id="addBtnDesktopWrap">
+          <img id="addBtnDesktop" src="../public/img/micIcon.svg" alt="Add Button">
+
         </div>
         <div class="col-4 d-flex justify-content-center">
           <form method="POST" class="" id="mobileButtons">
@@ -201,26 +211,57 @@ ${main.body}</textarea
       </div>
     </div>
 
-    <!-- MODAL  -->
-    <div
-      class="modal fade"
-      id="options"
-      tabindex="-1"
-      aria-labelledby="options"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog rounded-4">
-        <div class="modal-content bg-light" id="optionsModal">
-          <button
-            type="button"
-            class="btn-close d-none"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-          <div class="modal-body d-flex flex-column">
-            <div class="row m-1 justify-content-between">
-              <div class="col d-flex align-content-center">
-                <span class="fs-6 fw-bolder">Auto&nbsp;Save</span>
+
+  <!--SPEECH COMPONENETS-->
+  <div class="mb-3">
+    <label for="message-text" class="col-form-label">Message:</label>
+    <div class="result" spellcheck="false"
+    placeholder="Text will be shown here" id="message-text"></div>
+    <p class="interim"></p>
+  </div>
+
+<button type="button" class="btn clear" >Start Over</button>
+<button type="button" class="btn add" id="insertText"><p>Add this</p></button>
+
+  <!-- MODAL  -->
+  <div
+  class="modal fade"
+  id="options"
+  tabindex="-1"
+  aria-labelledby="options"
+  aria-hidden="true"
+>
+  <div class="modal-dialog rounded-4">
+    <div class="modal-content bg-light" id="optionsModal">
+      <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body d-flex flex-column">
+        <div class="row m-1 justify-content-between">
+          <div class="col d-flex align-content-center">
+            <span class="fs-6 fw-bolder">Auto&nbsp;Save</span>
+          </div>
+          <div class="col text-end">
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row m-1">
+          <div class="col d-flex align-content-center">
+            <span class="fs-6 fw-bolder">Color&nbsp;Mode</span>
+          </div>
+          <div class="col text-end">
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="sliderCS round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row d-flex m-1 mt-4">
+          <form action="/logout" method="post" id="logOutForm">
+            <button type="submit" class="modalBtn w-100 logoutBtn">
+              <div class="col btn btn-danger w-100">
+                <span class="fw-bolder">LOG&nbsp;OUT</span>
               </div>
               <div class="col text-end">
                 <label class="switch">
@@ -255,5 +296,6 @@ ${main.body}</textarea
     </div>
     <script src="../public/js/delete-note.js"></script>
     <script src="../public/js/note.js" type="module"></script>
+    <script src="../public/js/speech-modal.js"></script>
   </body>
 </html>
