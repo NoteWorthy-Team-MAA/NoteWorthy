@@ -1,6 +1,12 @@
 const express = require("express");
 const es6Renderer = require("express-es6-template-engine");
-const { getAllNotes, getNote, updateNote } = require("./queries/db");
+const {
+  getAllNotes,
+  getNote,
+  updateNote,
+  allCategories,
+  sortedCategories,
+} = require("./queries/db");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const session = require("express-session");
@@ -117,20 +123,26 @@ app.post("/", async (req, res) => {
 
 app.get("/notes", checkAuth, async (req, res) => {
   let sort = req.query.sort;
-  console.log(sort);
+  let category = req.query.category;
+  const { user } = req.session;
   res.render("notes", {
     locals: {
-      allNotes: await getAllNotes(sort, req.session.user.id),
+      allNotes: category
+        ? await sortedCategories(category, user.id)
+        : await getAllNotes(sort, user.id),
       sortMessage:
         sort === "ASC"
           ? "Sort By Date (Ascending)"
           : "Sort By Date (Descending)",
       rotation: sort === "ASC" ? "rotated-icon" : "",
+      allCategories: await allCategories(user.id),
     },
     partials: {
       noteCard: "partials/noteCard",
+      removeFilterTag: category ? "partials/tag" : "partials/empty",
     },
   });
+  // console.log(await allCategories(user.id));
 });
 
 app.get("/notes/:note", async (req, res) => {
@@ -162,7 +174,7 @@ app.post("/notes/:id", async (req, res) => {
   const { id } = req.params;
   const { title, category, body } = req.body;
   await updateNote(title, category, body, id);
-  res.redirect(`/notes/${id}?save=success`);
+  res.redirect(`/notes/${id}?save=success?&cat=${category}`);
 });
 
 app.delete("/notes/:id", async (req, res) => {

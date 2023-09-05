@@ -1,19 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
   let tag = document.querySelectorAll(".tag");
-
   for (let i = 0; i < tag.length; i++) {
-    if (tag[i].innerHTML.toUpperCase() == "PERSONAL") {
-      tag[i].style.background = "#FB7777";
-    } else if (tag[i].innerHTML.toUpperCase() == "PROFESSIONAL") {
-      tag[i].style.background = "#2C9A4B";
-    } else if (tag[i].innerHTML.toUpperCase() == "HEALTH") {
-      tag[i].style.background = "#0FD5D8";
-    } else if (tag[i].innerHTML.toUpperCase() == "SCHOOL") {
-      tag[i].style.background = "#0FD5D8";
-    } else if (tag[i].innerHTML.toUpperCase() == "TRAVEL") {
-      tag[i].style.background = "#6410CF";
-    } else if (tag[i].innerHTML.toUpperCase() == "ALL") {
-      tag[i].style.background = "#373939";
+    let cat = document.querySelectorAll(".tag .category");
+    for (let j = 0; j < cat.length; j++) {
+      if (cat[i].innerHTML.toUpperCase() == "PERSONAL") {
+        tag[i].style.background = "#FB7777";
+      } else if (cat[i].innerHTML.toUpperCase() == "PROFESSIONAL") {
+        tag[i].style.background = "#2C9A4B";
+      } else if (cat[i].innerHTML.toUpperCase() == "HEALTH") {
+        tag[i].style.background = "#0FD5D8";
+      } else if (cat[i].innerHTML.toUpperCase() == "SCHOOL") {
+        tag[i].style.background = "#ff00dc";
+      } else if (cat[i].innerHTML.toUpperCase() == "TRAVEL") {
+        tag[i].style.background = "#6410CF";
+      } else if (cat[i].innerHTML.toUpperCase() == "NO CATEGORY") {
+        tag[i].style.background = "#ff7e00";
+      }
     }
   }
 
