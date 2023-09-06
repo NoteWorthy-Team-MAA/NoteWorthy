@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark-mode">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width='device-width', initial-scale=1.0" />
@@ -121,7 +121,7 @@
     <form class="addBtnDesktopForm d-none d-lg-block shadowHover" method="POST">
       <button type="submit" id="addBtnWrap" class="bg-transparent border-0 addBtnBtn triggersLoadingScreen shadowHover">
         <div id="addBtnDesktopWrap">
-          <img id="addBtnDesktop" class="addBtn shadowElement" src="../public/img/addBtnDesktop.svg" alt="Add Button">
+          <img id="addBtnDesktop" class="addBtn shadowElement addBtnIconImg" src="../public/img/addBtnDesktop.svg" alt="Add Button">
         </div>
       </button>
     </form>
@@ -140,7 +140,7 @@
         <form method="POST" class="" id="mobileButtons">
           <button type="submit" id="addBtnWrapMobile" class="bg-transparent border-0 addBtnBtn triggersLoadingScreen">
           <div>
-            <img id="addBtnImg" class="shadowElement" src="../public/img/addBtnDesktop.svg" alt="Add Button">
+            <img id="addBtnImg" class="shadowElement addBtnIconImg" src="../public/img/addBtnDesktop.svg" alt="Add Button">
           </div>
         </button>
       </form>
@@ -193,8 +193,8 @@
               </div>
               <div class="col text-end">
                 <label class="switch">
-                  <input type="checkbox" />
-                  <span class="sliderCS round"></span>
+                  <input id="themeSwitch" type="checkbox" />
+                  <span  class="sliderCS round"></span>
                 </label>
               </div>
             </div>
