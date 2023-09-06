@@ -49,3 +49,24 @@ document.querySelector("#filterByDateText").addEventListener("click", (e) => {
     }
   });
 });
+
+if (
+  document.querySelector(`html`).getAttribute("data-bs-theme") == `dark-mode`
+) {
+  document
+    .querySelector(`#addBtnImg`)
+    .setAttribute(`src`, "../public/img/addBtnWhite.svg");
+  document
+    .querySelector(`#mobileSearchImg`)
+    .setAttribute(`src`, "../public/img/desktopSearch.svg");
+  document
+    .querySelector(`#optionsMobileImg`)
+    .setAttribute(`src`, "../public/img/cogDesktop.svg");
+  document
+    .querySelector(`#addBtnDesktop`)
+    .setAttribute(`src`, "../public/img/addBtnWhite.svg");
+  document
+    .querySelector(`#headerWrapOffcanvas`)
+    .querySelector(`button`)
+    .classList.add("btn-close-white");
+}

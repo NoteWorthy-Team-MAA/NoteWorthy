@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark-mode">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width='device-width', initial-scale=1.0" />
@@ -34,20 +34,20 @@
             class="modalBtn" id=""
             data-bs-toggle="offcanvas" data-bs-target="#categories" aria-controls="categories"
           >
-            <img src="../public/img/desktopSearch.svg" alt="search">
+            <img class="shadowElement" src="../public/img/desktopSearch.svg" alt="search">
           </button>
           <button
             type="button"
-            class="modalBtn btn"
+            class="modalBtn"
             data-bs-toggle="modal"
             data-bs-target="#options"
           >
-            <img src="../public/img/cogDesktop.svg">
+            <img class="shadowElement" src="../public/img/cogDesktop.svg">
           </button>
         </div>
       </div>
     </div>
-    <div class="container">
+<div id="outterCardWrapper" class="container">
     <div class="row w-100">
       <div class="col m-4">
         <img
@@ -58,11 +58,6 @@
         <span
           class="fst-italic fs-6 fw-bolder text-decoration-underline triggersLoadingScreen"
           id="filterByDateText"
-          style="
-            color: rgba(51, 51, 51, 0.7);
-            font-family: Poppins;
-            cursor: pointer;
-          "
           >${sortMessage || "Sort By Date (Descending)"}</span
         >
       </div>
@@ -75,7 +70,7 @@
     >
       <div class="content d-flex flex-column mx-5 mb-4">
         <div
-          class="card-wrap p-2 bg-light rounded-4"
+          class="card-wrap p-2  rounded-4"
           style="filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.5))"
         >
           <div class="row d-flex flex-column" style="width: 100%">
@@ -100,14 +95,14 @@
                 >${ new Date(note.updatedAt).toLocaleDateString("en-US", {
                 month: "short", }).toUpperCase() } ${ new
                 Date(note.updatedAt).toLocaleDateString("en-US", { day:
-                "numeric", }).toUpperCase() }</span><span class="fst-normal"> ${ new
-                  Date(note.updatedAt).toLocaleTimeString("en-US").toUpperCase() }</span><span class="fst-italic"> last updated</span
+                "numeric", }).toUpperCase() },</span><span class="fst-normal opacity-50"> ${ new
+                  Date(note.updatedAt).toLocaleTimeString("en-US").toUpperCase() }</span><span class="fst-italic opacity-50"> last updated</span
               >
             </div>
             <div class="col">
               <span
                 class="title fw-normal fst-normal fs-6 fw-bold"
-                style="color: #333; font-family: Poppins"
+                style="font-family: Poppins"
               >
                 ${note.title.replace(/(<([^>]+)>)/ig, '')}
               </span>
@@ -122,11 +117,11 @@
       </div>
     </a>
     `).join('')}
-  </div>
-    <form class="addBtnDesktopForm d-none d-lg-block shadowHover  " method="POST">
-      <button type="submit" id="addBtnWrap" class="bg-transparent border-0 addBtnBtn triggersLoadingScreen">
+</div>
+    <form class="addBtnDesktopForm d-none d-lg-block shadowHover" method="POST">
+      <button type="submit" id="addBtnWrap" class="bg-transparent border-0 addBtnBtn triggersLoadingScreen shadowHover">
         <div id="addBtnDesktopWrap">
-          <img id="addBtnDesktop" class="addBtn" src="../public/img/addBtnDesktop.svg" alt="Add Button">
+          <img id="addBtnDesktop" class="addBtn shadowElement" src="../public/img/addBtnDesktop.svg" alt="Add Button">
         </div>
       </button>
     </form>
@@ -138,14 +133,14 @@
               class="modalBtn"
               data-bs-toggle="offcanvas" data-bs-target="#categories" aria-controls="categories"
             >
-              <img src="../public/img/searchMobile.svg" alt="search">
+              <img id="mobileSearchImg" class="shadowElement" src="../public/img/searchMobile.svg" alt="search">
             </button>
         </div> 
         <div class="col-4 d-flex justify-content-center">
         <form method="POST" class="" id="mobileButtons">
           <button type="submit" id="addBtnWrapMobile" class="bg-transparent border-0 addBtnBtn triggersLoadingScreen">
-          <div id="addBtnDesktopWrap">
-            <img id="addBtnDesktop" src="../public/img/addBtnDesktop.svg" alt="Add Button">
+          <div>
+            <img id="addBtnImg" class="shadowElement" src="../public/img/addBtnDesktop.svg" alt="Add Button">
           </div>
         </button>
       </form>
@@ -157,7 +152,7 @@
               data-bs-toggle="modal"
               data-bs-target="#options"
             >
-              <img src="../public/img/cogWheelBlack.svg">
+              <img id="optionsMobileImg" class="shadowElement" src="../public/img/cogWheelBlack.svg">
             </button>
           </form>
         </div>
@@ -173,7 +168,7 @@
       aria-hidden="true"
     >
       <div class="modal-dialog rounded-4">
-        <div class="modal-content bg-light" id="optionsModal">
+        <div class="modal-content" id="optionsModal">
           <button
             type="button"
             class="btn-close d-none"
@@ -218,12 +213,12 @@
     </div>
     <!-- SEARCH MODAL  -->
     <div
-      class="offcanvas category offcanvas-bottom rounded-top-3 d-flex justify-content-center bg-light mx-auto"
+      class="offcanvas category offcanvas-bottom rounded-top-3 d-flex justify-content-center mx-auto"
       tabindex="-1"
       id="categories"
       aria-labelledby="offcanvasBottomLabel"
     >
-      <div class="offcanvas-header">
+      <div class="offcanvas-header" id="headerWrapOffcanvas">
         <h5 class="offcanvas-title text-center w-100" id="offcanvasBottomLabel">
           Search&nbsp;By&nbsp;Category
         </h5>
@@ -235,8 +230,9 @@
         ></button>
       </div>
       <div
-        class="offcanvas-body small w-auto mx-4 d-flex bg-white rounded-top-4"
+        class="offcanvas-body small w-auto mx-4 d-flex rounded-top-4"
         style="box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25)"
+        id="innerWrapCategories"
       >
         <div class="d-flex row">
           ${removeFilterTag || ""}

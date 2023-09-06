@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width='device-width', initial-scale=1.0" />
@@ -60,76 +60,51 @@
         </div>
       </div>
     </div>
+    <div class="container">
+
     <div class="d-flex mx-5 my-5 my-md-3">
-      <div class="custom-editor-wrapper w-100">
-        <div class="d-flex row">
-          <div class="col">
-            <div class="topbar">
-              <span class="fst-italic text-black opacity-50">Last Updated</span
-              >&nbsp;
-              <span
-                class="fst-italic text-black opacity-50"
-                style="font-weight: 900"
-              >
-                ${ new Date(main.updatedAt).toLocaleDateString("en-US", { month:
-                "short", }).toUpperCase() } ${ new
-                Date(main.updatedAt).toLocaleDateString("en-US", { day:
-                "numeric", }).toUpperCase() }
-              </span>
-            </div>
+    <div class="custom-editor-wrapper w-100" >
+      <div class="d-flex row">
+        <div class="col">
+         <div class="topbar">
+           <span class="fst-italic opacity-50">Last Updated</span>&nbsp;
+           <span class="fst-italic opacity-50" style="font-weight: 900;">
+            ${ new Date(main.updatedAt).toLocaleDateString("en-US", {
+            month: "short", }).toUpperCase() } ${ new
+            Date(main.updatedAt).toLocaleDateString("en-US", { day:
+            "numeric", }).toUpperCase() }
+           </span>
           </div>
         </div>
-
-        <form method="post">
-          <div class="row flex-md-row flex-column">
-            <div class="col-md-7 col-12">
-              <textarea
-                placeholder="Title Here"
-                class="border-0 bg-transparent titleStyle"
-                name="title"
-                id="title"
-              >
-${main.title}</textarea
-              >
-            </div>
-            <div
-              class="col-md-2 col-12 d-flex align-items-center justify-content-md-start justify-content-end ms-auto"
-            >
-              <p class="mb-0" style="color: green">${saveMessage}</p>
-            </div>
-            <div
-              class="col-12 d-flex mb-2 mb-md-0 col-md-1 justify-content-md-center justify-content-end align-items-center"
-            >
-              <button
-                class="triggersLoadingScreen btn btn-light px-2 py-0 rounded-4 actionBtn border-0"
-                type="submit"
-                style="height: 3vh"
-              >
-                <span class="opacity-50 text-black saveBtnText p-0">
-                  SAVE&nbsp;ENTRY
-                </span>
-              </button>
-            </div>
-            <div
-              class="col-12 col-md-1 d-flex mb-2 mb-md-0 justify-content-md-start justify-content-end align-items-center"
-            >
-              <button
-                id="deleteBtn"
-                class="triggersLoadingScreen btn btn-danger px-2 py-0 rounded-4 actionBtn border-0"
-              >
-                <span class="text-white saveBtnText p-0"> DELETE </span>
-              </button>
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col">
-              <select
-                aria-placeholder="Set a value"
-                class="bg-info border-0 shadow-sm ps-1 rounded-5 text-white pe-0"
-                name="category"
-                id="category"
-              >
+    </div>
+    <form method="post">
+      <div class="row flex-md-row flex-column">
+        <div class="col-md-7 col-12">
+          <textarea id="titleArea" placeholder="Title Here" class="border-0 bg-transparent titleStyle" name="title" id="title">${main.title}</textarea>
+        </div>
+           <div class="col-md-2 col-12 d-flex align-items-center justify-content-md-start justify-content-end">
+             <p class="mb-0" style="color: green">${saveMessage}</p>
+           </div>
+      <div class="col-12 d-flex mb-2 mb-md-0 col-md-2 justify-content-md-center justify-content-end align-items-center">
+            <button class="triggersLoadingScreen btn btn-light px-2 py-0 rounded-4 actionBtn border-0" type="submit" style="height: 3vh;">
+              <span class="opacity-50 text-black saveBtnText p-0">
+                SAVE&nbsp;ENTRY
+              </span>
+            </button>
+           </div> 
+      <div class="col-12 col-md-1 d-flex mb-2 mb-md-0 justify-content-md-start justify-content-end align-items-center">
+          <button id="deleteBtn" class="triggersLoadingScreen btn btn-danger px-2 py-0 rounded-4 actionBtn border-0">
+            <span class="text-white saveBtnText p-0">
+              DELETE
+            </span>
+          </button>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+      <select aria-placeholder="Set a value" class="border-0 shadow-sm ps-1 rounded-5 text-white pe-0" name="category" id="category">
                 <option value="NO CATEGORY">NO CATEGORY</option>
+
                 <option value="PERSONAL">PERSONAL</option>
                 <option value="PROFESSIONAL">PROFESSIONAL</option>
                 <option value="HEALTH">HEALTH</option>
@@ -170,42 +145,28 @@ ${main.body}</textarea
           <button
             type="button"
             class="modalBtn border-0 bg-transparent triggersLoadingScreen">
-            <img src="../public/img/blackBackBtn.svg">
+            <img class="backBtnImg" src="../public/img/blackBackBtn.svg">
           </button>
         </a>
       </div> 
       <div class="col-4 d-flex justify-content-center">
-      <form method="POST" class="" id="mobileButtons">
-        <button type="submit" id="addBtnWrapMobile" class="bg-transparent border-0 addBtnBtn">
+        <button id="addBtnWrapMobile" class="bg-transparent border-0 addBtnBtn">
         <div id="addBtnDesktopWrap">
-          <img id="addBtnDesktop" src="../public/img/micIcon.svg" alt="Add Button">
+          <img class="micIconImg" id="addBtnDesktop" src="../public/img/micIcon.svg" alt="Add Button">
+        </div>
+      </button>
+   
+  </div>
+  <div class="col-2 d-flex justify-content-center ">
+    <button
 
-        </div>
-        <div class="col-4 d-flex justify-content-center">
-          <form method="POST" class="" id="mobileButtons">
-            <button
-              type="submit"
-              id="addBtnWrapMobile"
-              class="bg-transparent border-0 addBtnBtn"
-            >
-              <div id="addBtnDesktopWrap">
-                <img
-                  id="addBtnDesktop"
-                  src="../public/img/micIcon.svg"
-                  alt="Add Button"
-                />
-              </div>
-            </button>
-          </form>
-        </div>
-        <div class="col-2 d-flex justify-content-center">
-          <button
             type="button"
             class="modalBtn btn"
             data-bs-toggle="modal"
             data-bs-target="#options"
           >
-            <img src="../public/img/cogWheelBlack.svg" />
+            <img class="cogImg" src="../public/img/cogWheelBlack.svg">
+
           </button>
         </div>
       </div>
@@ -220,7 +181,7 @@ ${main.body}</textarea
     <p class="interim"></p>
     <button type="button" class="btn clear" >Start Over</button>
   </div>
-
+    </div>
   <!-- MODAL  -->
   <div
   class="modal fade"
