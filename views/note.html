@@ -179,7 +179,7 @@ ${main.body}</textarea
   aria-hidden="true"
 >
   <div class="modal-dialog rounded-4">
-    <div class="modal-content bg-light" id="optionsModal">
+    <div class="modal-content" id="optionsModal">
       <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
       <div class="modal-body d-flex flex-column">
         <div class="row m-1 justify-content-between">
@@ -210,32 +210,6 @@ ${main.body}</textarea
               <div class="col btn btn-danger w-100">
                 <span class="fw-bolder">LOG&nbsp;OUT</span>
               </div>
-              <div class="col text-end">
-                <label class="switch">
-                  <input type="checkbox" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-            </div>
-            <div class="row m-1">
-              <div class="col d-flex align-content-center">
-                <span class="fs-6 fw-bolder">Color&nbsp;Mode</span>
-              </div>
-              <div class="col text-end">
-                <label class="switch">
-                  <input type="checkbox" />
-                  <span class="sliderCS round"></span>
-                </label>
-              </div>
-            </div>
-            <div class="row d-flex m-1 mt-4">
-              <form action="/logout" method="post" id="logOutForm">
-                <button type="submit" class="modalBtn w-100 logoutBtn">
-                  <div class="col btn btn-danger w-100">
-                    <span class="fw-bolder">LOG&nbsp;OUT</span>
-                  </div>
-                </button>
-              </form>
             </div>
           </div>
         </div>
