@@ -42,22 +42,27 @@
 // tinymce.init(dfreeHeaderConfig);
 // tinymce.init(dfreeBodyConfig);
 
-tinymce.init({
-  selector: "textarea#title",
+const titlePromise = tinymce.init({
+  selector: "textarea#titleArea",
   skin: "oxide",
   height: "7vh",
   plugins: "lists code table codesample link",
-  content_css: "/public/css/note.css",
+  content_css: ["../public/css/note.css", "dark"],
   toolbar: false,
   menubar: false,
   statusbar: false,
 });
 
-tinymce.init({
-  selector: "textarea#body",
-  skin: "oxide",
-  plugins: "lists code table codesample link",
+const noteTheme = document.querySelector(`html`).getAttribute("data-bs-theme");
 
+const bodyPromise = tinymce.init({
+  selector: "textarea#body",
+  skin: noteTheme === "dark-mode" ? "oxide-dark" : "oxide",
+  plugins: "lists code table codesample link",
+  content_css:
+    noteTheme === "dark-mode"
+      ? ["../public/css/note.css", "dark"]
+      : "../public/css/note.css",
   toolbar:
     "blocks | bold italic underline strikethrough bullist link codesample image",
   menubar: false,
