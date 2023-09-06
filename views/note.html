@@ -122,21 +122,12 @@ ${main.body}</textarea
         </form>
       </div>
     </div>
-    <div id="micIconWrap" class="shadowHover">
-      <button
-        type="submit"
-        id="MicIconBtn"
-        class="d-lg-block d-none bg-transparent border-0 micIcon position-fixed translate-middle"
-      >
-        <img src="../public/img/micIcon.svg" alt="Mic" />
-      </button>
-    </div>
-
   </div>
-  <div id="micIconWrap" class="shadowHover ">
+  <div id="micIconWrap" class="shadowHover">
   <button type="submit" id="MicIconBtn" class="d-lg-block d-none bg-transparent border-0 micIcon position-fixed translate-middle record">
       <img class="micImage"src="../public/img/micIcon.svg" alt="Mic" style="width:120px; height:120px;">
     </button>
+    
   </div>
   <div class="d-flex d-lg-none justify-content-center position-fixed start-50 translate-middle-x z-3 bottom-0 w-100 shadowHover" id="mobileButtonsContainer">
     <div class="row d-flex align-items-center gap-4 justify-content-center">
@@ -149,16 +140,13 @@ ${main.body}</textarea
           </button>
         </a>
       </div> 
+      
       <div class="col-4 d-flex justify-content-center">
-        <button id="addBtnWrapMobile" class="bg-transparent border-0 addBtnBtn">
-        <div id="addBtnDesktopWrap">
-          <img class="micIconImg" id="addBtnDesktop" src="../public/img/micIcon.svg" alt="Add Button">
-        </div>
-      </button>
-   
-  </div>
-  <div class="col-2 d-flex justify-content-center ">
-    <button
+        <button type="button" id="addBtnWrapMobile" class="bg-transparent border-0 record">
+          <img class="micImage" src="../public/img/micIcon.svg" alt="Add Button">
+        
+        <div class="col-2 d-flex justify-content-center">
+          <button
 
             type="button"
             class="modalBtn btn"
