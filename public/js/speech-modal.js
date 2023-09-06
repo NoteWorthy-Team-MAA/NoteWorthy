@@ -6,11 +6,13 @@ let SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition,
   recognition,
   recording = false;
+  recognition = new SpeechRecognition();
 
 function speechToText(i) {
   try {
     recognition = new SpeechRecognition();
-    recognition.interimResults = true;
+    recognition.interimResults = false;
+    console.log(i)
     i.classList.add("recording");
     i
       .querySelector("img")
@@ -39,11 +41,12 @@ function speechToText(i) {
       }
     };
     recognition.onspeechend = () => {
-      speechToText();
+      speechToText(i);
     };
     recognition.onerror = (event) => {
       console.log(event);
-      stopRecording();
+      i.querySelector("img").setAttribute("src", "../public/img/micIcon.svg");
+      stopRecording(i);
       if (event.error === "no-speech") {
         alert("No speech was detected. Stopping...");
       } else if (event.error === "audio-capture") {
@@ -78,9 +81,8 @@ for (let i of recordBtn) {
 
 function stopRecording(i) {
   recognition.stop();
-  i
-    .querySelector("img")
-    .setAttribute("src", "../public/img/micIcon.svg");
+  console.log(i)
+  i.querySelector("img").setAttribute("src", "../public/img/micIcon.svg");
   i.classList.remove("recording");
   recording = false;
   result.innerHTML = "";
