@@ -217,29 +217,3 @@ select:hover {
     right: 50px;
     bottom: 50px
 }
-
-// .shadowHover .micIcon.recording .micImage {
-//   display:none;
-// }
-
-.shadowHover .micIcon .wave {
-  display:none;
-}
-
-.shadowHover .micIcon .wave2 {
-  display:none;
-}
-
-.shadowHover .micIcon.recording .wave {
-  display:block;
-  left: -25px;
-  bottom: 40px;
-  position:absolute;
-}
-
-.shadowHover .micIcon.recording .wave2 {
-  display:block;
-  right: -25px;
-  bottom: 40px;
-  position:absolute;
-}
