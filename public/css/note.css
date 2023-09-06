@@ -12247,6 +12247,6 @@ input:checked + .sliderCS:before {
   background-color: #45596C;
 }
 [data-bs-theme=dark-mode] #optionsModal {
-  background-color: #303F4B;
+  background-color: #4d4f51;
   color: white;
 }/*# sourceMappingURL=note.css.map */
