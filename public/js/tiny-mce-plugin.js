@@ -42,25 +42,28 @@
 // tinymce.init(dfreeHeaderConfig);
 // tinymce.init(dfreeBodyConfig);
 
+const noteTheme = localStorage.getItem("theme");
+
 const titlePromise = tinymce.init({
   selector: "textarea#titleArea",
-  skin: "oxide",
+  skin: noteTheme === "dark" ? "oxide-dark" : "oxide",
   height: "7vh",
   plugins: "lists code table codesample link",
-  content_css: ["../public/css/note.css", "dark"],
+  content_css:
+    noteTheme === "dark"
+      ? ["../public/css/note.css", "dark"]
+      : "../public/css/note.css",
   toolbar: false,
   menubar: false,
   statusbar: false,
 });
 
-const noteTheme = document.querySelector(`html`).getAttribute("data-bs-theme");
-
 const bodyPromise = tinymce.init({
   selector: "textarea#body",
-  skin: noteTheme === "dark-mode" ? "oxide-dark" : "oxide",
+  skin: noteTheme === "dark" ? "oxide-dark" : "oxide",
   plugins: "lists code table codesample link",
   content_css:
-    noteTheme === "dark-mode"
+    noteTheme === "dark"
       ? ["../public/css/note.css", "dark"]
       : "../public/css/note.css",
   toolbar:
