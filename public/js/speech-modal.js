@@ -16,8 +16,7 @@ function speechToText() {
     recognition = new SpeechRecognition();
     recognition.interimResults = true;
     recordBtn.classList.add("recording");
-    //doc.queryselect.style = red
-    // recordBtn.querySelector("p").innerHTML = "Listening...";
+    recordBtn.querySelector('img').setAttribute("src", "../public/img/recordingicon.svg" )
     recognition.start();
     recognition.onresult = (event) => {
       const speechResult = event.results[0][0].transcript;
@@ -81,8 +80,7 @@ recordBtn.addEventListener("click", () => {
 
 function stopRecording() {
   recognition.stop();
-  //style=green
-  // recordBtn.querySelector("p").innerHTML = "Start Listening";
+  recordBtn.querySelector('img').setAttribute("src", "../public/img/micIcon.svg")
   recordBtn.classList.remove("recording");
   recording = false;
   result.innerHTML = "";

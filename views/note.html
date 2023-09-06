@@ -113,7 +113,7 @@
   </div>
   <div id="micIconWrap" class="shadowHover ">
   <button type="submit" id="MicIconBtn" class="d-lg-block d-none bg-transparent border-0 micIcon position-fixed translate-middle record">
-      <img src="../public/img/micIcon.svg" alt="Mic">
+      <img class="micImage"src="../public/img/micIcon.svg" alt="Mic" style="width:120px; height:120px;">
     </button>
   </div>
   <div class="d-flex d-lg-none justify-content-center position-fixed start-50 translate-middle-x z-3 bottom-0 w-100 shadowHover" id="mobileButtonsContainer">
@@ -150,15 +150,13 @@
   </div>
 
   <!--SPEECH COMPONENETS-->
-  <div class="mb-3">
+  <div class="mb-3" style="display:none">
     <label for="message-text" class="col-form-label">Message:</label>
     <div class="result" spellcheck="false"
     placeholder="Text will be shown here" id="message-text"></div>
     <p class="interim"></p>
+    <button type="button" class="btn clear" >Start Over</button>
   </div>
-
-<button type="button" class="btn clear" >Start Over</button>
-<button type="button" class="btn add" id="insertText"><p>Add this</p></button>
 
   <!-- MODAL  -->
   <div
