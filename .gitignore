@@ -1,9 +1,9 @@
 .DS_Store
 node_modules
-config/config.json
 public/css/landing.css
 public/css/landing.css.map
 public/css/notes.css
 public/css/notes.css.map
 public/css/note.css.map
 public/css/note.css
+.env
