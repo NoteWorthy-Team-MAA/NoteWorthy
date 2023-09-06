@@ -1,0 +1,35 @@
+{
+  "development": {
+    "username": "noteworthy_user",
+    "password": "acvxkF68hGJuTlDMpgx2ynGOQeHdm8Fj",
+    "database": "noteworthy",
+    "host": "dpg-cjmc66r6fquc738hio60-a.ohio-postgres.render.com",
+    "dialect": "postgres",
+    "port": 5432,
+    "dialectOptions": {
+      "ssl": {
+        "require": true
+      }
+    }
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "noteworthy_user",
+    "password": "acvxkF68hGJuTlDMpgx2ynGOQeHdm8Fj",
+    "database": "noteworthy",
+    "host": "dpg-cjmc66r6fquc738hio60-a.ohio-postgres.render.com",
+    "dialect": "postgres",
+    "port": 5432,
+    "dialectOptions": {
+      "ssl": {
+        "require": true
+      }
+    }
+  }
+}

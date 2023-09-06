@@ -45,7 +45,11 @@ function speechToText(i) {
     };
     recognition.onerror = (event) => {
       console.log(event);
+      const theme = document.querySelector('html').getAttribute('data-bs-theme')
+      if
+      (theme == 'dark-mode'){i.querySelector("img").setAttribute("src", "../public/img/miceWhite.svg"); } else {
       i.querySelector("img").setAttribute("src", "../public/img/micIcon.svg");
+    }
       stopRecording(i);
       if (event.error === "no-speech") {
         alert("No speech was detected. Stopping...");
@@ -82,7 +86,11 @@ for (let i of recordBtn) {
 function stopRecording(i) {
   recognition.stop();
   console.log(i)
-  i.querySelector("img").setAttribute("src", "../public/img/micIcon.svg");
+  const theme = document.querySelector('html').getAttribute('data-bs-theme')
+      if (theme == 'dark-mode')
+      {i.querySelector("img").setAttribute("src", "../public/img/miceWhite.svg")} else {
+      i.querySelector("img").setAttribute("src", "../public/img/micIcon.svg")
+    }
   i.classList.remove("recording");
   recording = false;
   result.innerHTML = "";
