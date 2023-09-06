@@ -113,6 +113,8 @@ select:hover {
 #optionsModal {
     height: 200px;
     flex-shrink: 0;
+    color: black;
+    background-color: #FBF8F0;
 }
 .switch {
     position: relative;
@@ -266,4 +268,8 @@ select:hover {
 #category {
   background-color: #45596C;
 }
+#optionsModal {
+  background-color: #303F4B;
+  color: white;
 }
+
