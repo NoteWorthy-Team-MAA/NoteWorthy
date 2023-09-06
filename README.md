@@ -17,9 +17,6 @@ NoteWorthy can be used by anyone looking to jot down thoughts, take notes in a m
 
 This project was created by Andy Ficek[https://github.com/aficek703], Andre Ellis Jr[https://github.com/andreellisjunior], and Miranda Morton[https://github.com/mirandamorton1].
 
----
 
-## Badges
 
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
 
