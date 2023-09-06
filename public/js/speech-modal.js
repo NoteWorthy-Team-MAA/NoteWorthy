@@ -1,4 +1,4 @@
-const recordBtn = document.querySelectorAll(".record");
+const recordBtn = document.querySelector(".record");
 const result = document.querySelector(".result");
 const interim = document.querySelector(".interim");
 
@@ -8,15 +8,12 @@ let SpeechRecognition =
   recording = false;
   recognition = new SpeechRecognition();
 
-function speechToText(i) {
+function speechToText() {
   try {
     recognition = new SpeechRecognition();
     recognition.interimResults = false;
-    console.log(i)
-    i.classList.add("recording");
-    i
-      .querySelector("img")
-      .setAttribute("src", "../public/img/recordingicon.svg");
+    recordBtn.classList.add("recording");
+    recordBtn.querySelector("img").setAttribute("src", "../public/img/recordingicon.svg");
     recognition.start();
     recognition.onresult = (event) => {
       const speechResult = event.results[0][0].transcript;
@@ -41,16 +38,16 @@ function speechToText(i) {
       }
     };
     recognition.onspeechend = () => {
-      speechToText(i);
+      speechToText();
     };
     recognition.onerror = (event) => {
       console.log(event);
       const theme = document.querySelector('html').getAttribute('data-bs-theme')
       if
-      (theme == 'dark-mode'){i.querySelector("img").setAttribute("src", "../public/img/miceWhite.svg"); } else {
-      i.querySelector("img").setAttribute("src", "../public/img/micIcon.svg");
+      (theme == 'dark-mode'){recordBtn.querySelector("img").setAttribute("src", "../public/img/miceWhite.svg"); } else {
+        recordBtn.querySelector("img").setAttribute("src", "../public/img/micIcon.svg");
     }
-      stopRecording(i);
+      stopRecording();
       if (event.error === "no-speech") {
         alert("No speech was detected. Stopping...");
       } else if (event.error === "audio-capture") {
@@ -72,26 +69,25 @@ function speechToText(i) {
   }
 }
 
-for (let i of recordBtn) {
-  i.addEventListener("click", (e) => {
-    if (!recording) {
-      speechToText(i);
-      recording = true;
+recordBtn.addEventListener("click", (e) => {
+if (!recording) {
+    speechToText();
+    recording = true;
     } else {
-      stopRecording(i);
+    stopRecording();
     }
-  });
-}
+});
 
-function stopRecording(i) {
+
+function stopRecording() {
   recognition.stop();
-  console.log(i)
+  console.log()
   const theme = document.querySelector('html').getAttribute('data-bs-theme')
       if (theme == 'dark-mode')
-      {i.querySelector("img").setAttribute("src", "../public/img/miceWhite.svg")} else {
-      i.querySelector("img").setAttribute("src", "../public/img/micIcon.svg")
+      {recordBtn.querySelector("img").setAttribute("src", "../public/img/miceWhite.svg")} else {
+      recordBtn.querySelector("img").setAttribute("src", "../public/img/micIcon.svg")
     }
-  i.classList.remove("recording");
+  recordBtn.classList.remove("recording");
   recording = false;
   result.innerHTML = "";
   interim.innerHTML = "";
