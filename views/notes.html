@@ -83,13 +83,16 @@
                 >${ new Date(note.createdAt).toLocaleDateString("en-US", {
                 month: "short", }).toUpperCase() }
               </span>
-              <span class="tag py-2 px-3 rounded-pill text-white ms-auto"
+              <span class="tag py-2 px-3 rounded-pill text-white ms-auto">
+                <span class="category"
                 >${note.category.toUpperCase()}</span
               >
+              </span>
+              
             </div>
             <div class="col">
               <span class="fst-italic opacity-50" id="lastUpdated"
-                >${ new Date(note.createdAt).toLocaleDateString("en-US", {
+                >${ new Date(note.updatedAt).toLocaleDateString("en-US", {
                 month: "short", }).toUpperCase() } ${ new
                 Date(note.updatedAt).toLocaleDateString("en-US", { day:
                 "numeric", }).toUpperCase() },</span><span class="fst-normal opacity-50"> ${ new
@@ -232,12 +235,17 @@
         id="innerWrapCategories"
       >
         <div class="d-flex row">
-          ${allNotes.map(note => `
+          ${removeFilterTag || ""}
+          ${allCategories.map(note => `
           <div class="col mb-3">
-            <a href="#">
-              <span class="tag py-2 px-3 rounded-pill text-white ms-auto"
+            <a href="/notes?category=${note.category}">
+              <span class="tag py-2 px-3 rounded-pill position-relative text-white ms-auto">
+                <span class="category"
                 >${note.category.toUpperCase()}</span
               >
+              <span>(${note.dataValues.count})</span>
+              </span>
+              
             </a>
           </div>
           `).join('')}

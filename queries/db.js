@@ -10,8 +10,24 @@ const getAllNotes = async (sort, userId) => {
   });
 };
 
+const sortedCategories = async (category, userId) => {
+  return await Notes.findAll({
+    where: {
+      category,
+      userId,
+    },
+  });
+};
+
 const allCategories = async (userId) => {
-  return await Notes.findAll({});
+  return await Notes.findAll({
+    attributes: ["category", [Sequelize.literal("COUNT(*)"), "count"]],
+    group: ["category"],
+    order: [["count", "DESC"]],
+    where: {
+      userId,
+    },
+  });
 };
 
 const getNote = async (param, userId) => {
@@ -53,4 +69,5 @@ module.exports = {
   deleteNote,
   updateNote,
   allCategories,
+  sortedCategories,
 };

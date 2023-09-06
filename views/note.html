@@ -20,8 +20,10 @@
     <script src="../public/js/tiny-mce-plugin.js"></script>
   </head>
   <body id="mainBody">
-    <div class="loadingOverlay d-none position-fixed w-100 h-100 bg-dark opacity-50 z-3 align-items-center justify-content-center">
-      <div class="spinner-border z-3 text-primary " role="status">
+    <div
+      class="loadingOverlay d-none position-fixed w-100 h-100 bg-dark opacity-50 z-3 align-items-center justify-content-center"
+    >
+      <div class="spinner-border z-3 text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
@@ -30,28 +32,33 @@
         <div class="col w-100 mx-5">
           <img class="img-fluid" id="logo" src="../public/img/Group 54.png" />
         </div>
-        <div class="col w-100 justify-content-end d-flex align-items-center gap-5 me-5 d-none d-lg-flex" id="searchOptionsBtnDesktop">
+        <div
+          class="col w-100 justify-content-end d-flex align-items-center gap-5 me-5 d-none d-lg-flex"
+          id="searchOptionsBtnDesktop"
+        >
           <a href="/notes">
             <button
-            type="button"
-            class="modalBtn btn triggersLoadingScreen" id="filterIcon"
-            data-bs-toggle="offcanvas" data-bs-target="#categories" aria-controls="categories"
-          >
-            <img src="../public/img/backBtn.svg" alt="search">
-          </button>
+              type="button"
+              class="modalBtn btn triggersLoadingScreen"
+              id="filterIcon"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#categories"
+              aria-controls="categories"
+            >
+              <img src="../public/img/backBtn.svg" alt="search" />
+            </button>
           </a>
-          
+
           <button
             type="button"
             class="modalBtn btn"
             data-bs-toggle="modal"
             data-bs-target="#options"
           >
-            <img src="../public/img/cogDesktop.svg">
+            <img src="../public/img/cogDesktop.svg" />
           </button>
         </div>
       </div>
-
     </div>
     <div class="container">
 
@@ -96,25 +103,39 @@
     <div class="row mb-3">
       <div class="col">
       <select aria-placeholder="Set a value" class="border-0 shadow-sm ps-1 rounded-5 text-white pe-0" name="category" id="category">
-                <option value="ALL">ALL</option>
+                <option value="NO CATEGORY">NO CATEGORY</option>
+
                 <option value="PERSONAL">PERSONAL</option>
                 <option value="PROFESSIONAL">PROFESSIONAL</option>
                 <option value="HEALTH">HEALTH</option>
                 <option value="SCHOOL">SCHOOL</option>
                 <option value="TRAVEL">TRAVEL</option>
-        </select>
+              </select>
+            </div>
+          </div>
+          <hr class="text-black-50 w-25" />
+          <div class="row">
+            <textarea placeholder="Type here..." id="body" name="body">
+${main.body}</textarea
+            >
+          </div>
+        </form>
       </div>
     </div>
-    <hr class=" text-black-50 w-25">
-    <div class="row">
-              <textarea placeholder="Type here..." id="body" name="body">${main.body}</textarea>
-            </div>
-            </form>
+    <div id="micIconWrap" class="shadowHover">
+      <button
+        type="submit"
+        id="MicIconBtn"
+        class="d-lg-block d-none bg-transparent border-0 micIcon position-fixed translate-middle"
+      >
+        <img src="../public/img/micIcon.svg" alt="Mic" />
+      </button>
     </div>
+
   </div>
   <div id="micIconWrap" class="shadowHover ">
-  <button type="submit" id="MicIconBtn" class="d-lg-block d-none bg-transparent border-0 micIcon position-fixed translate-middle">
-      <img class="micIconImg" src="../public/img/micIcon.svg" alt="Mic" style="width: 120px; height: 120px;">
+  <button type="submit" id="MicIconBtn" class="d-lg-block d-none bg-transparent border-0 micIcon position-fixed translate-middle record">
+      <img class="micImage"src="../public/img/micIcon.svg" alt="Mic" style="width:120px; height:120px;">
     </button>
   </div>
   <div class="d-flex d-lg-none justify-content-center position-fixed start-50 translate-middle-x z-3 bottom-0 w-100 shadowHover" id="mobileButtonsContainer">
@@ -138,15 +159,27 @@
   </div>
   <div class="col-2 d-flex justify-content-center ">
     <button
+
             type="button"
             class="modalBtn btn"
             data-bs-toggle="modal"
             data-bs-target="#options"
           >
             <img class="cogImg" src="../public/img/cogWheelBlack.svg">
+
           </button>
-  </div>
+        </div>
+      </div>
     </div>
+
+
+  <!--SPEECH COMPONENETS-->
+  <div class="mb-3" style="display:none">
+    <label for="message-text" class="col-form-label">Message:</label>
+    <div class="result" spellcheck="false"
+    placeholder="Text will be shown here" id="message-text"></div>
+    <p class="interim"></p>
+    <button type="button" class="btn clear" >Start Over</button>
   </div>
     </div>
   <!-- MODAL  -->
@@ -189,14 +222,39 @@
               <div class="col btn btn-danger w-100">
                 <span class="fw-bolder">LOG&nbsp;OUT</span>
               </div>
-            </button>
-          </form>
+              <div class="col text-end">
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+            <div class="row m-1">
+              <div class="col d-flex align-content-center">
+                <span class="fs-6 fw-bolder">Color&nbsp;Mode</span>
+              </div>
+              <div class="col text-end">
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="sliderCS round"></span>
+                </label>
+              </div>
+            </div>
+            <div class="row d-flex m-1 mt-4">
+              <form action="/logout" method="post" id="logOutForm">
+                <button type="submit" class="modalBtn w-100 logoutBtn">
+                  <div class="col btn btn-danger w-100">
+                    <span class="fw-bolder">LOG&nbsp;OUT</span>
+                  </div>
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
     <script src="../public/js/delete-note.js"></script>
     <script src="../public/js/note.js" type="module"></script>
+    <script src="../public/js/speech-modal.js"></script>
   </body>
 </html>
