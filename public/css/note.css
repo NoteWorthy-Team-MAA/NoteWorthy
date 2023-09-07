@@ -12020,7 +12020,6 @@ textarea.form-control-lg {
 }
 
 .mce-content-body[data-id=titleArea] {
-  color: #333;
   font-size: 30px;
   font-style: normal;
   font-weight: 500;
@@ -12033,7 +12032,6 @@ textarea.form-control-lg {
   margin: 0px;
   height: 100vh;
   display: block;
-  color: #333 !important;
   border-bottom: #FBF8F0 1px;
 }
 
@@ -12095,6 +12093,8 @@ select:hover {
 #optionsModal {
   height: 200px;
   flex-shrink: 0;
+  color: black;
+  background-color: #FBF8F0;
 }
 
 .switch {
@@ -12245,4 +12245,8 @@ input:checked + .sliderCS:before {
 }
 [data-bs-theme=dark-mode] #category {
   background-color: #45596C;
+}
+[data-bs-theme=dark-mode] #optionsModal {
+  background-color: #4d4f51;
+  color: white;
 }/*# sourceMappingURL=note.css.map */

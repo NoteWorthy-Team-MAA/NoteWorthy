@@ -11977,7 +11977,7 @@ body {
   background: linear-gradient(180deg, #FFE8E0 0%, rgba(255, 255, 255, 0) 100%);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
   font-family: "Poppins", sans-serif;
 }
 
@@ -12018,7 +12018,7 @@ svg:hover {
 
 .tag {
   font-size: 12px;
-  text-wrap: nowrap;
+  white-space: nowrap;
 }
 
 #addBtnWrap {
@@ -12249,7 +12249,7 @@ a {
   background: #303F4B;
 }
 [data-bs-theme=dark-mode] #optionsModal {
-  background-color: #303F4B;
+  background-color: #4d4f51;
   color: white;
 }
 [data-bs-theme=dark-mode] #categories {

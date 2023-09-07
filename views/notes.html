@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark-mode">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width='device-width', initial-scale=1.0" />
@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-<div id="outterCardWrapper" class="container">
+<div id="outterCardWrapper" class="container" style="padding-bottom: 8rem;">
     <div class="row w-100">
       <div class="col m-4">
         <img
@@ -81,7 +81,7 @@
               </span>
               <span class="fw-light lh-lg fs-6 align-self-end" id="month"
                 >${ new Date(note.createdAt).toLocaleDateString("en-US", {
-                month: "short", }).toUpperCase() }
+                month: "short", }).toUpperCase() } 
               </span>
               <span class="tag py-2 px-3 rounded-pill text-white ms-auto">
                 <span class="category"
@@ -95,8 +95,9 @@
                 >${ new Date(note.updatedAt).toLocaleDateString("en-US", {
                 month: "short", }).toUpperCase() } ${ new
                 Date(note.updatedAt).toLocaleDateString("en-US", { day:
-                "numeric", }).toUpperCase() },</span><span class="fst-normal opacity-50"> ${ new
-                  Date(note.updatedAt).toLocaleTimeString("en-US").toUpperCase() }</span><span class="fst-italic opacity-50"> last updated</span
+                "numeric", }).toUpperCase() }, ${ new Date(note.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric", }).toUpperCase() } </span><span class="fst-normal opacity-50"> ${ new
+                  Date(note.updatedAt).toLocaleTimeString(["en-US"], {hour: "numeric", minute: "2-digit"}).toUpperCase() }</span><span class="fst-italic opacity-50"> last updated</span
               >
             </div>
             <div class="col">
@@ -121,7 +122,7 @@
     <form class="addBtnDesktopForm d-none d-lg-block shadowHover" method="POST">
       <button type="submit" id="addBtnWrap" class="bg-transparent border-0 addBtnBtn triggersLoadingScreen shadowHover">
         <div id="addBtnDesktopWrap">
-          <img id="addBtnDesktop" class="addBtn shadowElement" src="../public/img/addBtnDesktop.svg" alt="Add Button">
+          <img id="addBtnDesktop" class="addBtn shadowElement addBtnIconImg" src="../public/img/addBtnDesktop.svg" alt="Add Button">
         </div>
       </button>
     </form>
@@ -140,7 +141,7 @@
         <form method="POST" class="" id="mobileButtons">
           <button type="submit" id="addBtnWrapMobile" class="bg-transparent border-0 addBtnBtn triggersLoadingScreen">
           <div>
-            <img id="addBtnImg" class="shadowElement" src="../public/img/addBtnDesktop.svg" alt="Add Button">
+            <img id="addBtnImg" class="shadowElement addBtnIconImg" src="../public/img/addBtnDesktop.svg" alt="Add Button">
           </div>
         </button>
       </form>
@@ -193,8 +194,8 @@
               </div>
               <div class="col text-end">
                 <label class="switch">
-                  <input type="checkbox" />
-                  <span class="sliderCS round"></span>
+                  <input class="triggersLoadingScreen" id="themeSwitch" type="checkbox" />
+                  <span  class="sliderCS round"></span>
                 </label>
               </div>
             </div>

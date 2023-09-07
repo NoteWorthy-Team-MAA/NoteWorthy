@@ -70,3 +70,26 @@ if (
     .querySelector(`button`)
     .classList.add("btn-close-white");
 }
+
+if (localStorage.getItem("theme") === "dark") {
+  document.querySelector("html").setAttribute("data-bs-theme", "dark-mode");
+  document.querySelector("#themeSwitch").setAttribute("checked", true);
+  for (let e of document.querySelectorAll(".addBtnIconImg")) {
+    e.setAttribute("src", "../public/img/addBtnWhite.svg");
+  }
+  document
+    .querySelector(`#mobileSearchImg`)
+    .setAttribute("src", "../public/img/desktopSearch.svg");
+  document
+    .querySelector(`#optionsMobileImg`)
+    .setAttribute("src", "../public/img/cogDesktop.svg");
+}
+
+document.querySelector("#themeSwitch").addEventListener("click", () => {
+  if (document.querySelector("#themeSwitch").checked) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+  location.reload();
+});
