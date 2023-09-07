@@ -3,5 +3,4 @@ node_modules
 public/css/landing.css.map
 public/css/notes.css.map
 public/css/note.css.map
-
 .env
