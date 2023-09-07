@@ -19,6 +19,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  if (document.querySelector(`.noteLink`) == null) {
+    document.querySelector(`#filterRow`).classList.add("d-none");
+  } else {
+    document.querySelector(`#filterRow`).classList.remove("d-none");
+  }
+
+  window.addEventListener("pageshow", () => {
+    document
+      .querySelector(".loadingOverlay")
+      .classList.replace("d-flex", "d-none");
+  });
+
   document.querySelector(".logoutBtn").addEventListener("click", (e) => {
     document
       .querySelector(".loadingOverlay")
