@@ -35,6 +35,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+const iframe = document.querySelector("iframe#body_ifr");
+const doc = iframe.contentWindow.document;
+
+doc.body.onkeydown = function () {
+  var time = this._time;
+  var timestamp = new Date().getTime();
+  let timeElapsed = timestamp - time;
+  if (timeElapsed > 2000) {
+    fetch(``, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: document.getElementById("titleArea").value,
+        category: document.getElementById("category").value,
+        body: document.getElementById("body").value,
+      }),
+    }).then((res) => {
+      console.log("data saved");
+    });
+  }
+  this._time = timestamp;
+};
 
 const loadingScreenBtns = document.querySelectorAll(".triggersLoadingScreen");
 

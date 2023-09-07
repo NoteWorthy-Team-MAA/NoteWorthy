@@ -167,7 +167,7 @@ app.post("/notes/:id", async (req, res) => {
   const { id } = req.params;
   const { title, category, body } = req.body;
   await updateNote(title, category, body, id);
-  res.redirect(`/notes/${id}?save=success?&cat=${category}`);
+  res.redirect(`/notes/${id}?save=success&cat=${category}`);
 });
 
 app.delete("/notes/:id", async (req, res) => {

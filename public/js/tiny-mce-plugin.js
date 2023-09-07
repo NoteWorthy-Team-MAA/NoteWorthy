@@ -45,6 +45,7 @@
 const noteTheme = localStorage.getItem("theme");
 
 const titlePromise = tinymce.init({
+  id: "titleArea",
   selector: "textarea#titleArea",
   skin: noteTheme === "dark" ? "oxide-dark" : "oxide",
   height: "7vh",
@@ -59,6 +60,7 @@ const titlePromise = tinymce.init({
 });
 
 const bodyPromise = tinymce.init({
+  id: "bodyArea",
   selector: "textarea#body",
   skin: noteTheme === "dark" ? "oxide-dark" : "oxide",
   plugins: "lists code table codesample link",
