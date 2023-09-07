@@ -20,8 +20,7 @@ body {
     position: relative;
     height: 100vh;
     font-family: 'Poppins', sans-serif;
-    overflow-y: hidden;
-
+    overflow-y: scroll;
     &::after {
         content: "";
         position: absolute;
@@ -38,6 +37,16 @@ body {
         opacity: 20%;
         z-index: 2;
     }
+}
+.hoverFX{
+    transition: 0.2s all ease-in-out;
+    position: relative;
+    bottom: 0px;
+}
+.hoverFX:hover {
+    cursor: pointer;
+    filter: drop-shadow(0px 2px 20px #fdb49958) !important;
+    bottom: 5px;
 }
 div {
     z-index: 5;
@@ -70,9 +79,6 @@ h3 {
 #passwordWrap {
     border: solid;
 }
-#emailWrap {
-    border: solid;
-}
 #logInHeader {
     font-size: 53px;
 }
@@ -83,11 +89,22 @@ width: 100%;
 input:focus {
     outline: none;
 }
+::-webkit-scrollbar {
+    display: none;
+}
+.scrollImg::-webkit-scrollbar {
+    display: none;
+}
+.scrollImg {
+    height: 290px;
+    overflow-y: scroll;
+}
 @media screen and (min-width: 769px) {
 #logo {
     width: 100%;
     max-width: 14rem;
 }
+
 #logInBtnTwoWrap {
     display: none;
 }
