@@ -62,15 +62,19 @@ app.get("/", checkAuth, (req, res) => {
   });
 });
 
+// app.get("/login", checkAuth, (req,res) =>{});
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   console.log(username, password);
   const user = await Users.findOne({
-    where: { username, password },
+    where: { 
+      username, 
+       
+    },
   });
   if (user) {
-    const isValid = bcrypt.compare(password, user.password);
+    const isValid = await bcrypt.compare(password, user.password);
     console.log("valid user...checking password");
     if (isValid) {
       console.log("password is good!");
