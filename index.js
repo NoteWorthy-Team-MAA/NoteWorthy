@@ -52,9 +52,13 @@ const checkAuth = (req, res, next) => {
 };
 
 app.get("/", checkAuth, (req, res) => {
+  const { error } = req.query;
+  let errorMessage = error ? "Wrong user name or password!": "";
+  console.log(error)
   res.render("landing", {
     locals: {
       main: "This is the body text of the homepage",
+      errorMessage,
     },
     partials: {
       secondary: "partials/button",
@@ -82,11 +86,11 @@ app.post("/login", async (req, res) => {
       res.redirect("/notes");
     } else {
       console.log("but password is wrong");
-      res.redirect("/");
+      res.redirect("/?error=true");
     }
   } else {
     console.log("not a valid user");
-    res.redirect("/");
+    res.redirect("/?error=true");
   }
 });
 
