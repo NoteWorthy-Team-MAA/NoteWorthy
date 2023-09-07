@@ -53,8 +53,12 @@ const checkAuth = (req, res, next) => {
 
 app.get("/", checkAuth, (req, res) => {
   const { error } = req.query;
-  let errorMessage = error ? "Wrong user name or password!": "";
-  console.log(error)
+  let errorMessage = error
+    ? `<div class="col-lg-5 col-md-3 d-flex justify-content-center incorrectPassPop">
+  <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">Password is Incorrect</p>
+</div>`
+    : "";
+  console.log(error);
   res.render("landing", {
     locals: {
       main: "This is the body text of the homepage",
@@ -72,9 +76,8 @@ app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   console.log(username, password);
   const user = await Users.findOne({
-    where: { 
-      username, 
-       
+    where: {
+      username,
     },
   });
   if (user) {
