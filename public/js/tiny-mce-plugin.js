@@ -43,6 +43,7 @@
 // tinymce.init(dfreeBodyConfig);
 
 const titlePromise = tinymce.init({
+  id: "titleArea",
   selector: "textarea#titleArea",
   skin: "oxide",
   height: "7vh",
@@ -56,6 +57,7 @@ const titlePromise = tinymce.init({
 const noteTheme = document.querySelector(`html`).getAttribute("data-bs-theme");
 
 const bodyPromise = tinymce.init({
+  id: "bodyArea",
   selector: "textarea#body",
   skin: noteTheme === "dark-mode" ? "oxide-dark" : "oxide",
   plugins: "lists code table codesample link",
