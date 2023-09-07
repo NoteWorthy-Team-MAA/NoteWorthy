@@ -41,25 +41,15 @@ app.use(
 );
 store.sync();
 
-function checkAuth(req, res, next) {
-  if (req.session.user) {
-    next();
-  } else if (req.path == "/login") {
+const checkAuth = (req, res, next) => {
+  const pageNeedsLogIn = req.path === "/notes";
+  const isLoggedIn = !!req.session.user;
+  if (pageNeedsLogIn == isLoggedIn) {
     next();
   } else {
-    res.redirect("/login");
+    res.redirect(isLoggedIn ? "/notes" : "/");
   }
-}
-
-// const checkAuth = (req, res, next) => {
-//   const pageNeedsLogIn = req.path === "/notes";
-//   const isLoggedIn = !!req.session.user;
-//   if (pageNeedsLogIn == isLoggedIn) {
-//     next();
-//   } else {
-//     res.redirect(isLoggedIn ? "/notes" : "/");
-//   }
-// };
+};
 
 app.get("/", checkAuth, (req, res) => {
   res.render("landing", {
@@ -72,13 +62,12 @@ app.get("/", checkAuth, (req, res) => {
   });
 });
 
-app.get("/login", checkAuth, (req, res) => {});
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   console.log(username, password);
   const user = await Users.findOne({
-    where: { username },
+    where: { username, password },
   });
   if (user) {
     const isValid = bcrypt.compare(password, user.password);
@@ -89,11 +78,11 @@ app.post("/login", async (req, res) => {
       res.redirect("/notes");
     } else {
       console.log("but password is wrong");
-      res.redirect("/login");
+      res.redirect("/");
     }
   } else {
     console.log("not a valid user");
-    res.redirect("/login");
+    res.redirect("/");
   }
 });
 
