@@ -41,25 +41,25 @@ app.use(
 );
 store.sync();
 
-// function checkAuth(req, res, next) {
-//   if (req.session.user) {
-//     next();
-//   } else if (req.path == "/login") {
-//     next();
-//   } else {
-//     res.redirect("/login");
-//   }
-// }
-
-const checkAuth = (req, res, next) => {
-  const pageNeedsLogIn = req.path === "/notes";
-  const isLoggedIn = !!req.session.user;
-  if (pageNeedsLogIn == isLoggedIn) {
+function checkAuth(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else if (req.path == "/login") {
     next();
   } else {
-    res.redirect(isLoggedIn ? "/notes" : "/");
+    res.redirect("/login");
   }
-};
+}
+
+// const checkAuth = (req, res, next) => {
+//   const pageNeedsLogIn = req.path === "/notes";
+//   const isLoggedIn = !!req.session.user;
+//   if (pageNeedsLogIn == isLoggedIn) {
+//     next();
+//   } else {
+//     res.redirect(isLoggedIn ? "/notes" : "/");
+//   }
+// };
 
 app.get("/", checkAuth, (req, res) => {
   res.render("landing", {
