@@ -47,6 +47,23 @@ document.addEventListener("DOMContentLoaded", () => {
         .classList.replace("d-none", "d-flex");
     });
   }
+
+  // Correcting the last updated format
+  const lastUpdated = document.querySelectorAll(".lastUpdated");
+
+  for (let i = 0; i < lastUpdated.length; i++) {
+    const newDate = new Date(lastUpdated[i].textContent)
+      .toLocaleString("en-US", {
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      })
+      .toUpperCase();
+    lastUpdated[i].textContent = newDate;
+  }
 });
 
 document.querySelector("#filterByDateText").addEventListener("click", (e) => {

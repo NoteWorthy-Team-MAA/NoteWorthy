@@ -11,6 +11,7 @@
     />
     <link rel="stylesheet" href="../public/css/notes.css" type="text/css" />
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  </head>
 
   <body >
       <div class="loadingOverlay d-none position-fixed w-100 h-100 bg-dark opacity-50 z-3 align-items-center justify-content-center">
@@ -92,10 +93,8 @@
               
             </div>
             <div class="col">
-              <span class="fst-italic opacity-50" id="lastUpdated"
-                >${   new Date(note.updatedAt).toLocaleTimeString([], {
-                  weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'
-                })} </span><span class="fst-italic opacity-50"> last updated</span
+              <span class="fst-italic opacity-50 lastUpdated" id="lastUpdated"
+                >${note.updatedAt}</span><span class="fst-italic opacity-50"> last updated</span
               >
             </div>
             <div class="col">
