@@ -7,6 +7,7 @@
       ${(main.title.replace(/(<([^>]+)>)/ig, '') || "")} | NoteWorthy
     </title>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script
       src="../node_modules/tinymce/tinymce.min.js"
       referrerpolicy="origin"
@@ -27,6 +28,8 @@
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
+    ${newNoteMessage}
+    ${saveMessage}
     <div id="header" class="d-none w-100 d-lg-flex shadowHover">
       <div class="row w-100 d-flex z-3 align-content-center">
         <div class="col w-100 mx-5">
@@ -81,12 +84,9 @@
     </div>
     <form method="post">
       <div class="row flex-md-row flex-column">
-        <div class="col-md-7 col-12">
+        <div class="col-md-9 col-12">
           <textarea id="titleArea" placeholder="Title Here" class="border-0 bg-transparent titleStyle" name="title" id="title">${main.title}</textarea>
         </div>
-           <div class="col-md-2 col-12 d-flex align-items-center justify-content-md-start justify-content-end">
-             <p class="mb-0" style="color: green">${saveMessage}</p>
-           </div>
       <div class="col-12 d-flex mb-2 mb-md-0 col-md-2 justify-content-md-center justify-content-end align-items-center">
             <button id="saveBtnAction" class="triggersLoadingScreen btn btn-light px-2 py-0 rounded-4 actionBtn border-0" type="submit" style="height: 3vh;">
               <span class="opacity-50 text-black saveBtnText p-0">
@@ -217,5 +217,6 @@ ${main.body}</textarea
     <script src="../public/js/delete-note.js"></script>
     <script src="../public/js/note.js" type="module"></script>
     <script src="../public/js/speech-modal.js"></script>
+    <script src="../public/js/JQanimation.js"></script>
   </body>
 </html>

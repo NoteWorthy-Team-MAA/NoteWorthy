@@ -59,13 +59,11 @@ app.get("/", checkAuth, (req, res) => {
     <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">Username&nbsp;Already&nbsp;Exists!</p>
   </div>`
     : "";
-  console.log(exists);
   let errorMessage = error
     ? `<div class="position-absolute translate-middle-x start-50 mt-5" style="z-index: 10;">
     <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">Username or Password is Incorrect!</p>
   </div>`
     : "";
-  console.log(error);
   res.render("landing", {
     locals: {
       main: "This is the body text of the homepage",
@@ -80,7 +78,6 @@ app.get("/", checkAuth, (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log(username, password);
   const user = await Users.findOne({
     where: {
       username,
@@ -88,17 +85,13 @@ app.post("/login", async (req, res) => {
   });
   if (user) {
     const isValid = await bcrypt.compare(password, user.password);
-    console.log("valid user...checking password");
     if (isValid) {
-      console.log("password is good!");
       req.session.user = user;
       res.redirect("/notes");
     } else {
-      console.log("but password is wrong");
       res.redirect("/?error=true");
     }
   } else {
-    console.log("not a valid user");
     res.redirect("/?error=true");
   }
 });
@@ -106,7 +99,6 @@ app.post("/login", async (req, res) => {
 app.post("/", async (req, res) => {
   const { username, password, email } = req.body;
   if (username === "" || password === "" || email === "") {
-    console.log("username, password or email is blank");
   } else {
     bcrypt.hash(password, saltRounds, async function (err, hash) {
       try {
@@ -148,19 +140,28 @@ app.get("/notes", checkAuth, async (req, res) => {
       removeFilterTag: category ? "partials/tag" : "partials/empty",
     },
   });
-  // console.log(await allCategories(user.id));
 });
 
 app.get("/notes/:note", async (req, res) => {
   const save = req.query.save;
-  let saveMessage = save ? "SAVED" : "";
+  const newNote = req.query.newNoteCreated;
+  let saveMessage = save
+    ? `<div id="savedPopUp" class="shadow-lg position-absolute translate-middle-x start-50 mt-5" style="z-index: 10;">
+  <p class="mb-0 bg-success-subtle rounded-3 p-3 text-black ">Note Saved ✓</p>
+</div>`
+    : "";
+  let newNoteMessage = newNote
+    ? `<div id="createdPopUp" class="shadow-lg position-absolute translate-middle-x start-50 mt-5" style="z-index: 10;">
+    <p class="mb-0 bg-white rounded-3 p-3 text-black ">Note Created!</p>
+  </div>`
+    : "";
   const { note } = req.params;
   const { user } = req.session;
   res.render("note", {
     locals: {
       main: await getNote(note, user.id),
       saveMessage,
-      // allCategories: await allCategories(),
+      newNoteMessage,
     },
   });
 });
@@ -198,7 +199,6 @@ app.delete("/notes/:id", async (req, res) => {
 app.post("/logout", (req, res) => {
   req.session.destroy(function (err) {
     if (err) {
-      console.log(err);
     } else {
       res.redirect("/");
     }
