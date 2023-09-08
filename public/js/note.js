@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   var options = document.getElementById("category").options;
   const cat = new URLSearchParams(location.search).get("cat").toUpperCase();
-  console.log(cat);
   for (var i = 0; i < options.length; i++) {
     if (options[i].text == cat) {
       options[i].selected = true;
@@ -34,9 +33,7 @@ const handleKeyUp = (ev) => {
         body: bodyText,
         autoSave: true,
       }),
-    }).then((res) => {
-      console.log("data saved");
-    });
+    }).then((res) => {});
   }, 2000);
 };
 
@@ -75,7 +72,6 @@ const executeAutoSave = () => {};
 
 autoSaveSwitch.addEventListener("click", () => {
   autoSaveValue = parseInt(localStorage.getItem("auto-save"));
-  console.log(autoSaveValue);
   if (!autoSaveValue) {
     localStorage.setItem("auto-save", 1);
 

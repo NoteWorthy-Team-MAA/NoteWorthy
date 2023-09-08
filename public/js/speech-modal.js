@@ -6,14 +6,16 @@ let SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition,
   recognition,
   recording = false;
-  recognition = new SpeechRecognition();
+recognition = new SpeechRecognition();
 
 function speechToText() {
   try {
     recognition = new SpeechRecognition();
     recognition.interimResults = false;
     recordBtn.classList.add("recording");
-    recordBtn.querySelector("img").setAttribute("src", "../public/img/recordingicon.svg");
+    recordBtn
+      .querySelector("img")
+      .setAttribute("src", "../public/img/recordingicon.svg");
     recognition.start();
     recognition.onresult = (event) => {
       const speechResult = event.results[0][0].transcript;
@@ -27,7 +29,6 @@ function speechToText() {
         );
         tinyMCE.activeEditor.selection.collapse(false);
       } else {
-
         if (!document.querySelector(".interim")) {
           const interim = document.createElement("p");
           interim.classList.add("interim");
@@ -41,12 +42,18 @@ function speechToText() {
       speechToText();
     };
     recognition.onerror = (event) => {
-      console.log(event);
-      const theme = document.querySelector('html').getAttribute('data-bs-theme')
-      if
-      (theme == 'dark-mode'){recordBtn.querySelector("img").setAttribute("src", "../public/img/miceWhite.svg"); } else {
-        recordBtn.querySelector("img").setAttribute("src", "../public/img/micIcon.svg");
-    }
+      const theme = document
+        .querySelector("html")
+        .getAttribute("data-bs-theme");
+      if (theme == "dark-mode") {
+        recordBtn
+          .querySelector("img")
+          .setAttribute("src", "../public/img/miceWhite.svg");
+      } else {
+        recordBtn
+          .querySelector("img")
+          .setAttribute("src", "../public/img/micIcon.svg");
+      }
       stopRecording();
       if (event.error === "no-speech") {
         alert("No speech was detected. Stopping...");
@@ -64,29 +71,30 @@ function speechToText() {
     };
   } catch (error) {
     recording = false;
-
-    console.log(error);
   }
 }
 
 recordBtn.addEventListener("click", (e) => {
-if (!recording) {
+  if (!recording) {
     speechToText();
     recording = true;
-    } else {
+  } else {
     stopRecording();
-    }
+  }
 });
-
 
 function stopRecording() {
   recognition.stop();
-  console.log()
-  const theme = document.querySelector('html').getAttribute('data-bs-theme')
-      if (theme == 'dark-mode')
-      {recordBtn.querySelector("img").setAttribute("src", "../public/img/miceWhite.svg")} else {
-      recordBtn.querySelector("img").setAttribute("src", "../public/img/micIcon.svg")
-    }
+  const theme = document.querySelector("html").getAttribute("data-bs-theme");
+  if (theme == "dark-mode") {
+    recordBtn
+      .querySelector("img")
+      .setAttribute("src", "../public/img/miceWhite.svg");
+  } else {
+    recordBtn
+      .querySelector("img")
+      .setAttribute("src", "../public/img/micIcon.svg");
+  }
   recordBtn.classList.remove("recording");
   recording = false;
   result.innerHTML = "";
