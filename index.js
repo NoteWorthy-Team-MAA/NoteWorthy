@@ -53,12 +53,19 @@ const checkAuth = (req, res, next) => {
 
 app.get("/", checkAuth, (req, res) => {
   const { error } = req.query;
-  let errorMessage = error ? "Wrong user name or password!": "";
+  let errorMessage = error ? `<div class="col-lg-5 col-md-3 d-flex justify-content-center">
+  <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">${errorMessage}</p>
+</div>`: "";
   console.log(error)
+  const { exists } = req.query;
+  let existsMessage = exists ? ` <div class="col-lg-5 col-md-3 d-flex justify-content-center">
+  <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">${existsMessage}</p>
+</div>`: "";
+  console.log(exists)
   res.render("landing", {
     locals: {
       main: "This is the body text of the homepage",
-      errorMessage,
+      errorMessage, existsMessage
     },
     partials: {
       secondary: "partials/button",
@@ -66,7 +73,6 @@ app.get("/", checkAuth, (req, res) => {
   });
 });
 
-// app.get("/login", checkAuth, (req,res) =>{});
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -112,7 +118,7 @@ app.post("/", async (req, res) => {
         if (e.name === "SequelizeUniqueConstraintError") {
         }
 
-        res.redirect("/");
+        res.redirect("/?exists=true");
       }
     });
   }
