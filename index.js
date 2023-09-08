@@ -1,3 +1,4 @@
+process.env.TZ = "UTC";
 const express = require("express");
 const es6Renderer = require("express-es6-template-engine");
 const {
@@ -138,7 +139,11 @@ app.get("/notes", checkAuth, async (req, res) => {
     //     .format(note.updatedAt)
     //     .toUpperCase()
     // );
-    console.log(note.updatedAt.toString());
+    console.log(
+      note.updatedAt.toLocaleString("en-US", {
+        timezone: "America/Chicago",
+      })
+    );
   });
   res.render("notes", {
     locals: {
