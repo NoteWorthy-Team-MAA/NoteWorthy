@@ -23,7 +23,9 @@
       <div class="row w-100 d-flex z-3 align-content-center shadowHover">
 
         <div class="col w-100 mx-5">
-          <img class="img-fluid" id="logo" src="../public/img/Group 54.png" />
+          <a href="/">
+            <img class="img-fluid" id="logo" src="../public/img/Group 54.png" />
+          </a>
         </div>
         <div
           class="col w-100 justify-content-end d-flex gap-5 me-5 d-none d-lg-flex"
@@ -173,17 +175,6 @@
             aria-label="Close"
           ></button>
           <div class="modal-body d-flex flex-column">
-            <div class="row m-1 justify-content-between">
-              <div class="col d-flex align-content-center">
-                <span class="fs-6 fw-bolder">Auto&nbsp;Save</span>
-              </div>
-              <div class="col text-end">
-                <label class="switch">
-                  <input type="checkbox" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-            </div>
             <div class="row m-1">
               <div class="col d-flex align-content-center">
                 <span class="fs-6 fw-bolder">Color&nbsp;Mode</span>
@@ -195,10 +186,10 @@
                 </label>
               </div>
             </div>
-            <div class="row d-flex m-1 mt-4">
+            <div class="row d-flex m-1 mt-4 align-items-end d-flex h-100">
               <form action="/logout" method="post" id="logOutForm">
                 <button type="submit" class="modalBtn w-100 logoutBtn triggersLoadingScreen">
-                  <div class="col btn btn-danger w-100">
+                  <div class="col btn btn-danger w-100 ">
                     <span class="fw-bolder">LOG&nbsp;OUT</span>
                   </div>
                 </button>

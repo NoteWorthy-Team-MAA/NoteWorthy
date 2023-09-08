@@ -1,5 +1,52 @@
+document.addEventListener("DOMContentLoaded", () => {
+  var options = document.getElementById("category").options;
+  const cat = new URLSearchParams(location.search).get("cat").toUpperCase();
+  console.log(cat);
+  for (var i = 0; i < options.length; i++) {
+    if (options[i].text == cat) {
+      options[i].selected = true;
+      break;
+    }
+  }
+});
+
 await titlePromise;
 await bodyPromise;
+
+let iframe = document.querySelector("iframe#body_ifr");
+let doc = iframe.contentWindow.document;
+
+let timeout;
+const handleKeyUp = (ev) => {
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    let title = tinymce.get("titleArea").getContent();
+    let bodyText = tinymce.get("body").getContent();
+
+    fetch(``, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        category: document.getElementById("category").value,
+        body: bodyText,
+        autoSave: true,
+      }),
+    }).then((res) => {
+      console.log("data saved");
+    });
+  }, 2000);
+};
+
+const autoSaveSwitch = document.querySelector("#autoSaveSwitch");
+
+let autoSaveValue = parseInt(localStorage.getItem("auto-save"));
+if (autoSaveValue === 1) {
+  autoSaveSwitch.setAttribute("checked", true);
+  doc.addEventListener("keyup", handleKeyUp);
+}
 
 if (localStorage.getItem("theme") === "dark") {
   document.querySelector("html").setAttribute("data-bs-theme", "dark-mode");
@@ -24,41 +71,22 @@ document.querySelector("#themeSwitch").addEventListener("click", () => {
   document.querySelector("#saveBtnAction").click();
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  var options = document.getElementById("category").options;
-  const cat = new URLSearchParams(location.search).get("cat").toUpperCase();
-  console.log(cat);
-  for (var i = 0; i < options.length; i++) {
-    if (options[i].text == cat) {
-      options[i].selected = true;
-      break;
-    }
+const executeAutoSave = () => {};
+
+autoSaveSwitch.addEventListener("click", () => {
+  autoSaveValue = parseInt(localStorage.getItem("auto-save"));
+  console.log(autoSaveValue);
+  if (!autoSaveValue) {
+    localStorage.setItem("auto-save", 1);
+
+    executeAutoSave();
+    doc.addEventListener("keyup", handleKeyUp);
+  } else {
+    localStorage.setItem("auto-save", 0);
+
+    doc.removeEventListener("keyup", handleKeyUp);
   }
 });
-const iframe = document.querySelector("iframe#body_ifr");
-const doc = iframe.contentWindow.document;
-
-doc.body.onkeydown = function () {
-  var time = this._time;
-  var timestamp = new Date().getTime();
-  let timeElapsed = timestamp - time;
-  if (timeElapsed > 2000) {
-    fetch(``, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: document.getElementById("titleArea").value,
-        category: document.getElementById("category").value,
-        body: document.getElementById("body").value,
-      }),
-    }).then((res) => {
-      console.log("data saved");
-    });
-  }
-  this._time = timestamp;
-};
 
 const loadingScreenBtns = document.querySelectorAll(".triggersLoadingScreen");
 

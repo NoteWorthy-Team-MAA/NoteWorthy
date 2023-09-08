@@ -53,15 +53,17 @@ const checkAuth = (req, res, next) => {
 
 app.get("/", checkAuth, (req, res) => {
   const { error } = req.query;
-  let errorMessage = error ? `<div class="col-lg-5 col-md-3 d-flex justify-content-center">
-  <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">${errorMessage}</p>
-</div>`: "";
-  console.log(error)
   const { exists } = req.query;
   let existsMessage = exists ? ` <div class="col-lg-5 col-md-3 d-flex justify-content-center">
-  <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">${existsMessage}</p>
+  <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">Username Already Exists!</p>
 </div>`: "";
   console.log(exists)
+  let errorMessage = error
+    ? `<div class="col-lg-5 col-md-3 d-flex justify-content-center incorrectPassPop">
+  <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">Username or Password is Incorrect</p>
+</div>`
+    : "";
+  console.log(error);
   res.render("landing", {
     locals: {
       main: "This is the body text of the homepage",
@@ -78,9 +80,8 @@ app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   console.log(username, password);
   const user = await Users.findOne({
-    where: { 
-      username, 
-       
+    where: {
+      username,
     },
   });
   if (user) {
@@ -169,15 +170,17 @@ app.post("/notes", async (req, res) => {
     body: "",
     userId: req.session.user.id,
   });
-  res.redirect(`/notes/${newNote.id}`);
+  res.redirect(`/notes/${newNote.id}?newNoteCreated=true`);
 });
 
 //UPDATING NOTE
 app.post("/notes/:id", async (req, res) => {
   const { id } = req.params;
-  const { title, category, body } = req.body;
+  const { title, category, body, autoSave } = req.body;
   await updateNote(title, category, body, id);
-  res.redirect(`/notes/${id}?save=success&cat=${category}`);
+  autoSave
+    ? res.sendStatus(200)
+    : res.redirect(`/notes/${id}?save=success&cat=${category}`);
 });
 
 app.delete("/notes/:id", async (req, res) => {
