@@ -1,6 +1,11 @@
-if ($(`#createdPopUp`) !== undefined) {
-  $(`#createdPopUp`).fadeOut(1500);
-}
-if ($(`#savedPopUp`) !== undefined) {
-  $(`#savedPopUp`).fadeOut(1500);
-}
+$(document).ready(() => {
+  if ($(".message-popup") !== undefined) {
+    setTimeout(() => {
+      $(".message-popup").animate({
+        top: "-200px",
+        opacity: 0,
+        display: "none",
+      });
+    }, 1500);
+  }
+});
