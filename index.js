@@ -131,6 +131,23 @@ app.get("/notes", checkAuth, async (req, res) => {
   let sort = req.query.sort;
   let category = req.query.category;
   const { user } = req.session;
+  const notes = await getAllNotes(sort, user.id);
+  notes.map((note) => {
+    // console.log(
+    //   new Intl.DateTimeFormat("en-US", {
+    //     hour: "numeric",
+    //     minute: "2-digit",
+    //     month: "short",
+    //     year: "numeric",
+    //     weekday: "short",
+    //     day: "numeric",
+    //     hour12: true,
+    //   })
+    //     .format(note.updatedAt)
+    //     .toUpperCase()
+    // );
+    console.log(note.updatedAt.toLocaleString());
+  });
   res.render("notes", {
     locals: {
       allNotes: category

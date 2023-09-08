@@ -94,8 +94,9 @@
             </div>
             <div class="col">
               <span class="fst-italic opacity-50" id="lastUpdated"
-                >${   new Intl.DateTimeFormat('en-US',{hour: "numeric", minute: "2-digit", month: "short", year: "numeric", weekday: "short", day: "numeric", hour12: true}).format(note.updatedAt)
-                .toUpperCase() } </span><span class="fst-italic opacity-50"> last updated</span
+                >${   new Date(note.updatedAt).toLocaleTimeString([], {
+                  weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'
+                })} </span><span class="fst-italic opacity-50"> last updated</span
               >
             </div>
             <div class="col">
