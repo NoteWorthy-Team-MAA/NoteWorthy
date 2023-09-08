@@ -54,27 +54,29 @@ const checkAuth = (req, res, next) => {
 app.get("/", checkAuth, (req, res) => {
   const { error } = req.query;
   const { exists } = req.query;
-  let existsMessage = exists ? ` <div class="col-lg-5 col-md-3 d-flex justify-content-center">
-  <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">Username Already Exists!</p>
-</div>`: "";
-  console.log(exists)
+  let existsMessage = exists
+    ? `<div class="position-absolute translate-middle-x start-50 mt-5" style="z-index: 10;">
+    <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">Username&nbsp;Already&nbsp;Exists!</p>
+  </div>`
+    : "";
+  console.log(exists);
   let errorMessage = error
-    ? `<div class="col-lg-5 col-md-3 d-flex justify-content-center incorrectPassPop">
-  <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">Username or Password is Incorrect</p>
-</div>`
+    ? `<div class="position-absolute translate-middle-x start-50 mt-5" style="z-index: 10;">
+    <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">Username or Password is Incorrect!</p>
+  </div>`
     : "";
   console.log(error);
   res.render("landing", {
     locals: {
       main: "This is the body text of the homepage",
-      errorMessage, existsMessage
+      errorMessage,
+      existsMessage,
     },
     partials: {
       secondary: "partials/button",
     },
   });
 });
-
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
