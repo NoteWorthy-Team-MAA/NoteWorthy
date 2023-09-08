@@ -80,8 +80,6 @@ document.querySelector("#themeSwitch").addEventListener("click", () => {
   document.querySelector("#saveBtnAction").click();
 });
 
-const executeAutoSave = () => {};
-
 autoSaveSwitch.addEventListener("click", () => {
   autoSaveValue = parseInt(localStorage.getItem("auto-save"));
   if (!autoSaveValue) {

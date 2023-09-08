@@ -56,12 +56,12 @@ app.get("/", checkAuth, (req, res) => {
   const { error } = req.query;
   const { exists } = req.query;
   let existsMessage = exists
-    ? `<div class="position-absolute translate-middle-x start-50 mt-5" style="z-index: 10;">
+    ? `<div class="position-absolute translate-middle-x start-50 mt-5 message-popup" style="z-index: 10;">
     <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">Username&nbsp;Already&nbsp;Exists!</p>
   </div>`
     : "";
   let errorMessage = error
-    ? `<div class="position-absolute translate-middle-x start-50 mt-5" style="z-index: 10;">
+    ? `<div class="position-absolute translate-middle-x start-50 mt-5 message-popup" style="z-index: 10;">
     <p class="mb-0 bg-info rounded-3 p-3 text-black shadow-lg">Username or Password is Incorrect!</p>
   </div>`
     : "";
@@ -124,27 +124,6 @@ app.get("/notes", checkAuth, async (req, res) => {
   let sort = req.query.sort;
   let category = req.query.category;
   const { user } = req.session;
-  const notes = await getAllNotes(sort, user.id);
-  notes.map((note) => {
-    // console.log(
-    //   new Intl.DateTimeFormat("en-US", {
-    //     hour: "numeric",
-    //     minute: "2-digit",
-    //     month: "short",
-    //     year: "numeric",
-    //     weekday: "short",
-    //     day: "numeric",
-    //     hour12: true,
-    //   })
-    //     .format(note.updatedAt)
-    //     .toUpperCase()
-    // );
-    console.log(
-      note.updatedAt.toLocaleString("en-US", {
-        timezone: "America/Chicago",
-      })
-    );
-  });
   res.render("notes", {
     locals: {
       allNotes: category
@@ -168,12 +147,12 @@ app.get("/notes/:note", async (req, res) => {
   const save = req.query.save;
   const newNote = req.query.newNoteCreated;
   let saveMessage = save
-    ? `<div id="savedPopUp" class="shadow-lg position-absolute translate-middle-x start-50 mt-5" style="z-index: 10;">
+    ? `<div class="shadow-lg position-absolute translate-middle-x start-50 mt-5 message-popup" style="z-index: 10;">
   <p class="mb-0 bg-success-subtle rounded-3 p-3 text-black ">Note Saved ✓</p>
 </div>`
     : "";
   let newNoteMessage = newNote
-    ? `<div id="createdPopUp" class="shadow-lg position-absolute translate-middle-x start-50 mt-5" style="z-index: 10;">
+    ? `<div class="shadow-lg position-absolute translate-middle-x start-50 mt-5 message-popup" style="z-index: 10;">
     <p class="mb-0 bg-white rounded-3 p-3 text-black ">Note Created!</p>
   </div>`
     : "";
