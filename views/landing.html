@@ -10,20 +10,21 @@
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 </head>
 <body class="">
+    ${errorMessage}
+    ${existsMessage}
     <div class="container d-flex flex-column align-items-center justify-content-between" style="height: 100vh;">
         <div class="row ml-1 mt-5 w-100">
-            <div class="col-lg-4 col-md-3 col-sm-12" id="logoWrap">
+            <div class="col-lg-9 col-md-8 col-sm-12" id="logoWrap">
                 <a href="/">
                     <img class="" id="logo" src="./public/img/Group 54.png">
                 </a>
             </div>
-            ${errorMessage}
-            ${existsMessage}
-                   <div class="col-lg-1 col-md-2 col-sm-3" id="logInCont">
+           
+            <div class="col-lg-1 col-md-2 col-sm-3" id="logInCont">
                 <div class="btn text-white hoverFX" id="logInBtn" data-bs-toggle="modal" data-bs-target="#loginModal"><span>LOG&nbsp;IN</span></div>
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-4" id="signUpCont">
-                <div id="signUpBtn" class="text-bg-info hoverFX rounded-pill btn" data-bs-toggle="modal" data-bs-target="#signupModal"><span class="px-2">SIGN UP</span></div>
+            <div class="col-lg-2 col-md-2 col-sm-4" id="signUpCont">
+                <div id="signUpBtn" class="text-bg-info hoverFX rounded-pill btn" data-bs-toggle="modal" data-bs-target="#signupModal"><span class="px-2">SIGN&nbsp;UP</span></div>
             </div>
         </div>
         <div class="row mt-5">
