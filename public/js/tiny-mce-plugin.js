@@ -1,5 +1,6 @@
 const noteTheme = localStorage.getItem("theme");
 
+const max_length = 37;
 const titlePromise = tinymce.init({
   id: "titleArea",
   selector: "textarea#titleArea",
@@ -13,8 +14,17 @@ const titlePromise = tinymce.init({
   toolbar: false,
   menubar: false,
   statusbar: false,
+  setup : function(ed) {
+    ed.on("keypress", function(event){
+         const content =  tinymce.activeEditor.getContent().replace(/(<([^>]+)>)/ig,"");
+         if(content.length >= max_length){
+             return false;
+         }
+     });
+    }
 });
 
+const mx_length = 10000;
 const bodyPromise = tinymce.init({
   id: "bodyArea",
   selector: "textarea#body",
@@ -28,4 +38,12 @@ const bodyPromise = tinymce.init({
     "blocks | bold italic underline strikethrough bullist link codesample image",
   menubar: false,
   statusbar: false,
+  setup : function(ed) {
+    ed.on("keypress", function(event){
+         const content =  tinymce.activeEditor.getContent().replace(/(<([^>]+)>)/ig,"");
+         if(content.length >= mx_length){
+             return false;
+         }
+     });
+    }
 });
