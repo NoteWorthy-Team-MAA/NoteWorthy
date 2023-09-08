@@ -78,11 +78,11 @@
           <div class="row d-flex flex-column" style="width: 100%">
             <div class="col d-flex">
               <span class="fw-bold fs-4" id="dayOfMonth"
-                >${ new Intl.DateTimeFormat('en-US',{timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, day: "numeric"}).format(note.createdAt)
+                >${ new Intl.DateTimeFormat('en-US',{day: "numeric"}).format(note.createdAt)
                 .toUpperCase() }
               </span>
               <span class="fw-light lh-lg fs-6 align-self-end" id="month"
-                >${ new Intl.DateTimeFormat('en-US',{timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, month: "short"}).format(note.createdAt)
+                >${ new Intl.DateTimeFormat('en-US',{month: "short"}).format(note.createdAt)
                 .toUpperCase() } 
               </span>
               <span class="tag py-2 px-3 rounded-pill text-white ms-auto">
@@ -94,7 +94,7 @@
             </div>
             <div class="col">
               <span class="fst-italic opacity-50" id="lastUpdated"
-                >${   new Intl.DateTimeFormat('en-US',{timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone, hour: "numeric", minute: "2-digit", month: "short", year: "numeric", weekday: "short", day: "numeric", hour12: true}).format(note.updatedAt)
+                >${   new Intl.DateTimeFormat('en-US',{hour: "numeric", minute: "2-digit", month: "short", year: "numeric", weekday: "short", day: "numeric", hour12: true}).format(note.updatedAt)
                 .toUpperCase() } </span><span class="fst-italic opacity-50"> last updated</span
               >
             </div>
