@@ -138,7 +138,7 @@ app.get("/notes", checkAuth, async (req, res) => {
     //     .format(note.updatedAt)
     //     .toUpperCase()
     // );
-    console.log(note.updatedAt.toLocaleString());
+    console.log(note.updatedAt.toString());
   });
   res.render("notes", {
     locals: {
