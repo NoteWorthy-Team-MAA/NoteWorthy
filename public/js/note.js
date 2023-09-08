@@ -9,6 +9,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+window.addEventListener("pageshow", () => {
+  if (document.querySelector(".loadingOverlay") !== undefined) {
+    document
+      .querySelector(".loadingOverlay")
+      .classList.replace("d-flex", "d-none");
+  }
+});
+
+if (!navigator.userAgent.includes(`Chrome`)) {
+  document.querySelector(`#micIconWrap`).classList.add(`d-none`);
+}
+
 await titlePromise;
 await bodyPromise;
 
