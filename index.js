@@ -166,15 +166,17 @@ app.post("/notes", async (req, res) => {
     body: "",
     userId: req.session.user.id,
   });
-  res.redirect(`/notes/${newNote.id}`);
+  res.redirect(`/notes/${newNote.id}?newNoteCreated=true`);
 });
 
 //UPDATING NOTE
 app.post("/notes/:id", async (req, res) => {
   const { id } = req.params;
-  const { title, category, body } = req.body;
+  const { title, category, body, autoSave } = req.body;
   await updateNote(title, category, body, id);
-  res.redirect(`/notes/${id}?save=success&cat=${category}`);
+  autoSave
+    ? res.sendStatus(200)
+    : res.redirect(`/notes/${id}?save=success&cat=${category}`);
 });
 
 app.delete("/notes/:id", async (req, res) => {
