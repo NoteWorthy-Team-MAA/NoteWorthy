@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 await titlePromise;
 await bodyPromise;
 
-let iframe = document.querySelector("iframe#body_ifr");
-let doc = iframe.contentWindow.document;
+let iframe = $("#body_ifr");
+let doc = iframe[0].contentWindow.document;
 
 let timeout;
 const handleKeyUp = (ev) => {
