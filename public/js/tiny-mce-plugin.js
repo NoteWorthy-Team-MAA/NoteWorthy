@@ -14,14 +14,16 @@ const titlePromise = tinymce.init({
   toolbar: false,
   menubar: false,
   statusbar: false,
-  setup : function(ed) {
-    ed.on("keypress", function(event){
-         const content =  tinymce.activeEditor.getContent().replace(/(<([^>]+)>)/ig,"");
-         if(content.length >= max_length){
-             return false;
-         }
-     });
-    }
+  setup: function (ed) {
+    ed.on("keypress", function (event) {
+      const content = tinymce.activeEditor
+        .getContent()
+        .replace(/(<([^>]+)>)/gi, "");
+      if (content.length >= max_length) {
+        return false;
+      }
+    });
+  },
 });
 
 const mx_length = 10000;
@@ -29,7 +31,6 @@ const bodyPromise = tinymce.init({
   id: "bodyArea",
   selector: "textarea#body",
   skin: noteTheme === "dark" ? "oxide-dark" : "oxide",
-  plugins: "lists code table codesample link",
   content_css:
     noteTheme === "dark"
       ? ["../public/css/note.css", "dark"]
@@ -38,12 +39,14 @@ const bodyPromise = tinymce.init({
     "blocks | bold italic underline strikethrough bullist link codesample image",
   menubar: false,
   statusbar: false,
-  setup : function(ed) {
-    ed.on("keypress", function(event){
-         const content =  tinymce.activeEditor.getContent().replace(/(<([^>]+)>)/ig,"");
-         if(content.length >= mx_length){
-             return false;
-         }
-     });
-    }
+  setup: function (ed) {
+    ed.on("keypress", function (event) {
+      const content = tinymce.activeEditor
+        .getContent()
+        .replace(/(<([^>]+)>)/gi, "");
+      if (content.length >= mx_length) {
+        return false;
+      }
+    });
+  },
 });
